@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Your first PLINK tutorial | Genomics Boot Camp</title>
+  <meta name="description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Your first PLINK tutorial | Genomics Boot Camp" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Your first PLINK tutorial | Genomics Boot Camp" />
+  
+  <meta name="twitter:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+<meta name="author" content="Gábor Mészáros" />
+
+
+<meta name="date" content="2021-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="genotype-files-in-practice.html"/>
+<link rel="next" href="genotype-data-quality-control.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Genomics Boot Camp</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hello and welcome!</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>1.2</b> Copyright</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="technical-preparations.html"><a href="technical-preparations.html"><i class="fa fa-check"></i><b>2</b> Technical preparations</a><ul>
+<li class="chapter" data-level="2.1" data-path="technical-preparations.html"><a href="technical-preparations.html#overall-recommendations-tips-and-tricks"><i class="fa fa-check"></i><b>2.1</b> Overall recommendations, tips and tricks</a></li>
+<li class="chapter" data-level="2.2" data-path="technical-preparations.html"><a href="technical-preparations.html#file-naming-conventions"><i class="fa fa-check"></i><b>2.2</b> File naming conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basic-software.html"><a href="basic-software.html"><i class="fa fa-check"></i><b>3</b> Basic software</a><ul>
+<li class="chapter" data-level="3.1" data-path="basic-software.html"><a href="basic-software.html#text-editors"><i class="fa fa-check"></i><b>3.1</b> Text Editors</a></li>
+<li class="chapter" data-level="3.2" data-path="basic-software.html"><a href="basic-software.html#file-management"><i class="fa fa-check"></i><b>3.2</b> File management</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html"><i class="fa fa-check"></i><b>4</b> PLINK - Software for genomic analyses</a><ul>
+<li class="chapter" data-level="4.1" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>5</b> R and RStudio</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#getting-r-and-r-studio"><i class="fa fa-check"></i><b>5.1</b> Getting R and R Studio</a></li>
+<li class="chapter" data-level="5.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#how-to-use-r-studio"><i class="fa fa-check"></i><b>5.2</b> How to use R Studio</a></li>
+<li class="chapter" data-level="5.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#excercise"><i class="fa fa-check"></i><b>5.3</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html"><i class="fa fa-check"></i><b>6</b> Genotype files in practice</a><ul>
+<li class="chapter" data-level="6.1" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#fam-file---info-on-individuals"><i class="fa fa-check"></i><b>6.1</b> Fam file - Info on individuals</a></li>
+<li class="chapter" data-level="6.2" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bim-file---snp-location-info"><i class="fa fa-check"></i><b>6.2</b> Bim file - SNP location info</a></li>
+<li class="chapter" data-level="6.3" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bed-file---individual-genotypes"><i class="fa fa-check"></i><b>6.3</b> Bed file - Individual genotypes</a></li>
+<li class="chapter" data-level="6.4" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#excercise-1"><i class="fa fa-check"></i><b>6.4</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html"><i class="fa fa-check"></i><b>7</b> Your first PLINK tutorial</a><ul>
+<li class="chapter" data-level="7.1" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-plink-options"><i class="fa fa-check"></i><b>7.1</b> The PLINK options</a></li>
+<li class="chapter" data-level="7.2" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-ped-and-map-file-format"><i class="fa fa-check"></i><b>7.2</b> The ped and map file format</a></li>
+<li class="chapter" data-level="7.3" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#how-to-run-plink-from-r"><i class="fa fa-check"></i><b>7.3</b> How to run PLINK from R</a></li>
+<li class="chapter" data-level="7.4" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#exercise-1"><i class="fa fa-check"></i><b>7.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html"><i class="fa fa-check"></i><b>8</b> Genotype data quality control</a><ul>
+<li class="chapter" data-level="8.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#a-toy-example"><i class="fa fa-check"></i><b>8.1</b> A toy example</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-snp"><i class="fa fa-check"></i><b>8.1.1</b> Missingness per SNP</a></li>
+<li class="chapter" data-level="8.1.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-individual"><i class="fa fa-check"></i><b>8.1.2</b> Missingness per individual</a></li>
+<li class="chapter" data-level="8.1.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#minor-allele-frequency"><i class="fa fa-check"></i><b>8.1.3</b> Minor allele frequency</a></li>
+<li class="chapter" data-level="8.1.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#adherence-to-hardy-weinberg-distribution"><i class="fa fa-check"></i><b>8.1.4</b> Adherence to Hardy-Weinberg distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#how-qc-works-in-plink"><i class="fa fa-check"></i><b>8.2</b> How QC works in PLINK</a></li>
+<li class="chapter" data-level="8.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exceptions-from-snp-quality-control"><i class="fa fa-check"></i><b>8.3</b> Exceptions from SNP quality control</a></li>
+<li class="chapter" data-level="8.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exercise-2"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>9</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="9.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#run-a-pca-in-r"><i class="fa fa-check"></i><b>9.1</b> Run a PCA in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-script"><i class="fa fa-check"></i><b>9.1.1</b> PCA in R - The script</a></li>
+<li class="chapter" data-level="9.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-explanation"><i class="fa fa-check"></i><b>9.1.2</b> PCA in R - The explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#visualize-pca-results"><i class="fa fa-check"></i><b>9.2</b> Visualize PCA results</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-script"><i class="fa fa-check"></i><b>9.2.1</b> PCA visualization - The script</a></li>
+<li class="chapter" data-level="9.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-explanation"><i class="fa fa-check"></i><b>9.2.2</b> PCA visualization - The explanation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---comparison-to-published-results"><i class="fa fa-check"></i><b>9.2.3</b> PCA visualization - Comparison to published results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#exercise-summary"><i class="fa fa-check"></i><b>9.3</b> <del>Exercise</del> Summary</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics Boot Camp</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="your-first-plink-tutorial" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Your first PLINK tutorial</h1>
+<blockquote>
+<p><strong>Learning outcomes:</strong> At the end of this chapter, you will be able to change genotype data formats with PLINK.</p>
+</blockquote>
+<p>In the previous posts, you read about the general suggestions for the work environment, downloaded the PLINK software, and genotype data for a surprisingly large number of animals. But the program was not executed yet in any meaningful way... But now everything will change and you will finally run the PLINK program. Your goal will be to transform the binary file format saved as bim, bed, and fam files to a text-based genotype format saved as ped and map files. This exercise will also give you a detailed description of the use of PLINK. You will see that it is not difficult at all. Frankly, I look at the program as some kind of building-block game. You need to know what you want to achieve and all you need to do is add the correct elements to it. The first thing you need to write down is some sort of base structure. In fact, you can start with this very same line all the time and add elements to it.</p>
+<p>But before you begin...</p>
+<p>...I know, I know I am annoying with these recommendations all the time, and you are eager to jump in... But hear me out... You can type the PLINK commands directly to the command line, but don't do that. You will see that there will be many mistakes and re-runs all the time, and this way you will need to re-type all the time. This is a huge loss of time. You don't want that. Open a new text file instead and write your program script there. Ideally, this text file is saved in a cloud storage directory, so it is being automatically backupped upon save. Remember: the script files are very small in size, but extremely valuable given the amount of time you invested in writing them.</p>
+<p>...one more piece of advice, in case you are new to scripting and programming. You might be surprised, but the scripts you write should be readable by the computer, but perhaps even more importantly by people, including future you. Let me explain... You write any script today and you sort of know what it does. I guarantee you that if you come back to it even after a week, you will have to spend quite some time figuring out what it does. Not to mention if you wrote some stuff like two years ago... Or imagine that you have to send this script to your colleague, who was not involved in the writing at all! If it is not clear how to change even basic things like input file names or locations, you are just looking for problems. So just document your code using plain words what some crucial lines or sections do. I use the # hashtag sign at the beginning of each comment line to indicate it as such. Also, lines starting with a # are ignored in many programs, so do not cause general errors.</p>
+<p>Long story short: <strong>Document your code!</strong></p>
+<p>So now you will run PLINK. For real this time... Open the command prompt in a folder where you have the plink executable file and the genotype data, as described before in the <a href="plink-software-for-genomic-analyses.html#plink---software-for-genomic-analyses">PLINK - Software for genomic analyses</a> chapter. Open a new text file and copy the following lines in there:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Change binary genotype to ped+map format</span>
+plink <span class="op">--</span>bfile ADAPTmap_genotypeTOP_20160222_full <span class="op">--</span>cow <span class="op">--</span>nonfounders <span class="op">--</span>allow<span class="op">-</span>no<span class="op">-</span>sex <span class="op">--</span>recode <span class="op">--</span>out ADAPTmap_TOP</code></pre></div>
+<p>Save the text file. From now on any change you implement will be written to the text file first, so you can adapt easily in case of need. Copy the whole plink line to the command prompt (without the comment line) and press enter. You have to have 1Gb free space for the recoded file. If everything went well, you will see this:</p>
+<div class="figure"><span id="fig:fig7-1"></span>
+<img src="images/7-1-cmdSuccessfulPlinkRun.png" alt="A successful PLINK run" width="548" />
+<p class="caption">
+Figure 7.1: A successful PLINK run
+</p>
+</div>
+<p>In the following section I will explain what you just did in two parts:</p>
+<p>First, let's start with the PLINK options. I will list them, simultaneously providing a link to them on the PLINK website. I will also tell you how can you (easily?) find answers for any PLINK option.</p>
+<p>Second, I will talk about the resulting ped and map files, including their structure.</p>
+<div id="the-plink-options" class="section level2">
+<h2><span class="header-section-number">7.1</span> The PLINK options</h2>
+<p>I start with a general comment about the overall structure of PLINK that you have already noticed. After the program name, there are various options preceded by a double dash &quot;--&quot;. Some less-appropriate-text-editors like MS Word might autocorrect this to a long dash, which will result in an error. So again, just use a proper text editor.</p>
+<p>The PLINK options come in two formats:</p>
+<blockquote>
+<p><em>--optinName1</em></p>
+</blockquote>
+<blockquote>
+<p><em>--optionName2 space additionalParameter(s)RelatedToOptinName2</em></p>
+</blockquote>
+<p>What the options used in the previous run mean:</p>
+<p><a href="https://www.cog-genomics.org/plink/1.9/input#bed">--bfile</a> ADAPTmap_genotypeTOP_20160222_full This is how you specify that your input file format is a binary ped file. Because you have all three files in the same directory as the PLINK executable, you only need to specify the file prefix, and the program will automatically utilize everything from the bim, bed, and fam files.</p>
+<p><a href="https://www.cog-genomics.org/plink/1.9/input#chr_set">--cow</a> This specifies the number of chromosomes in your data set. In case you do not tell anything about chromosome sets, the program will use the human genome as a default setting. Now you might have noticed that we deal with goats, but we specify --cow here. This time we played on the fact that bot cattle and goats have 60 chromosomes. In case you use another organism, you either specify that option, or a new setting using --chr-set</p>
+<p><a href="https://www.cog-genomics.org/plink/1.9/filter#nonfounders">--nonfounders</a> Do you remember when I talked about parental information in the fam file? This option is related to bypass any animals with missing parent information being treated as founders. Now, when you read the description on the website, you will also see that it is considered only in a few cases anyway. The thing is, however, that I tend to forget to use the handle in specific cases, and then spend <em>a lot</em> of time figuring out what went wrong. This is the pesky type of error when there is no error message, but the outcome is just incorrect. So to avoid all of this, I use --nonfounders in all my plink lines.</p>
+<p><a href="https://www.cog-genomics.org/plink/1.9/filter#allow_no_sex">--allow-no-sex</a> Similar to parental info, the info on sex is also many times missing. As it might or might not be problematic for certain analyses, I have decided to include this option in all my PLINK lines. The justification is the same as for --nonfounders.</p>
+<p><a href="https://www.cog-genomics.org/plink/1.9/data#recode">--recode</a> This very simple command is the one that actually does all the work. By putting this in your code you specify that you want to have <em>ped</em> and <em>map</em> files as output.</p>
+<p><a href="https://www.cog-genomics.org/plink/1.9/general_usage#out">--out</a> ADAPTmap_TOP Specifies the file name for newly created files.</p>
+<p>So now you might have a very valid question: &quot;This is all nice, but how do I find descriptions for other types of analyses I want to do?&quot;</p>
+<p>The two possibilities are:</p>
+<ol style="list-style-type: decimal">
+<li>If you know exactly what are you looking for, you can use the handy search tool at the bottom of the left panel on the website, as shown in the picture. The result(s) below the search box are clickable links to the resource.</li>
+</ol>
+<div class="figure"><span id="fig:fig7-2"></span>
+<img src="images/7-2-plinkHelpSearch.png" alt="Find this bottom left on the PLINK website to get help" width="94" />
+<p class="caption">
+Figure 7.2: Find this bottom left on the PLINK website to get help
+</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>If you don't know what you are looking for, try to explore the topics discussed on the left panel on the PLINK website, check other people's code, or simply ask colleagues how to do something. Alternatively, you can also try to fish for answers in <a href="https://www.cog-genomics.org/plink/1.9/index">the list of all PLINK options</a>, using Ctrl+F text search capacities of your browser. You can also get there by clicking the &quot;index&quot; keyword link above the search bar.</li>
+</ol>
+<p>Here I would note that PLINK can do <em>many</em> things, but certainly not <em>everything</em>. So do not expect to be a one-stop-shop for all of your genomic analysis needs. It is just a tool. A handy one, but still just one out of many.</p>
+</div>
+<div id="the-ped-and-map-file-format" class="section level2">
+<h2><span class="header-section-number">7.2</span> The ped and map file format</h2>
+<p>In this section, we will take a brief look at the newly created files and tell something about their structure.</p>
+<p>You might have noticed that there are a few new files created in the same directory you have run the program. From these files, the ones with file extension .ped and .map are the most important.</p>
+<p>The <a href="https://www.cog-genomics.org/plink/1.9/formats#map">.map</a> file is very similar to the previously described .bim file, just without the last two columns with genotypes.</p>
+<p>The <a href="https://www.cog-genomics.org/plink/1.9/formats#ped">.ped</a> file structure is essentially the concatenation of the .fam file (one line per individual), followed by human-readable genotypes in text format. Every two columns represent one SNP in a space-delimited format.</p>
+<p>To open the .map file should be no problem. The .ped file however is nearly 1Gb in size! I got the &quot;File too big to be opened&quot; error message with Notepad++, but the TextPad opened it without problems (after a bit of waiting time, might be machine-dependent, you will see a small progress bar bottom left).</p>
+</div>
+<div id="how-to-run-plink-from-r" class="section level2">
+<h2><span class="header-section-number">7.3</span> How to run PLINK from R</h2>
+<p>As a practical demonstration of work with genomic data in R Studio, we will use PLINK example we discussed before in this chapter. With this, you will see the elements that need to be included to integrate the PLINK script to R and also prepare you for the grand finale of the first section - the PCA analysis.</p>
+<p>The script we will be running is the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># clear workspace</span>
+<span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())
+
+<span class="co"># set working directory</span>
+<span class="kw">setwd</span>(<span class="st">&quot;d:/analysis/2020_GenomicsBootCamp_Demo/&quot;</span>)
+
+<span class="co"># run PLINK QC</span>
+<span class="kw">system</span>(<span class="st">&quot;plink --bfile ADAPTmap_genotypeTOP_20160222_full --cow --nonfounders             --allow-no-sex --recode --out ADAPTmap_TOP&quot;</span>)</code></pre></div>
+<p>From my personal experience in learning and teaching genomic data analysis to people of wide-ranging levels of experience, just telling you to copy-paste-and-run-the-script does not lead anywhere. So I will explain the most important elements of this script.</p>
+<p>All lines starting with a hashtag # are comment lines. As I explained in a previous post, these are essential in all scripts. You need to be very clear what each part of the script is doing, which is much easier if you comment on it. The line rm(list = ls()) is a very useful one that I use in all my R scripts. It deletes everything from the workspace. This way I know that there are no pesky leftovers from previous analyses that might compromise my runs. (Ever had an experience of &quot;The script was running before and it is not running now!&quot;? This might be because of unintended data sets in the work environment.)</p>
+<p>The setwd() is an R function that (as the name implies) sets the working directory for this session. The working directory is the place, where R will look for all the data for the analyses and place any output files if you do not specify otherwise. By default, this is a directory somewhere on your system drive. While it will work, I strongly suggest changing it to comply with your own file organization structure in a custom directory, as discussed before. You will need to change this for your run. Just put the PATH to your working directory containing PLINK and the genotype files between the quotation marks. Please note that R uses the opposite slashes as Windows.</p>
+<p>You probably recognize the contents of the system() function. This is the exact copy of the PLINK command we used before, again between quotation marks. That's right! It is this easy to run PLINK from R. With the use of this function, the R opens the system command line, runs the line of code, and closes the command line.</p>
+<p>Each line of the script above could be run separately. To do this, just put your cursor to the line you want to execute, and press the &quot;Run&quot; button in the top right corner. Alternatively, you can use the even better and arguably quicker method of simultaneously pressing Ctrl+Enter (Command+Enter in Mac).</p>
+</div>
+<div id="exercise-1" class="section level2">
+<h2><span class="header-section-number">7.4</span> Exercise</h2>
+<p>Phewww... You made it to the end of this unexpectedly long description! Congratulations! But to really drive home the message and lock the knowledge in your memory, I have a small task for you.</p>
+<p>You see, the PLINK file formats are really popular, but there are many others out there. The good news is, that you can use PLINK to transform files to other popular formats. One of them is undoubtedly the so-called variant call format that is the standard output file from whole-genome sequencing pipelines, and a possible input to some other programs. So your task is to change the ADAPTmap file to vcf file format.</p>
+<p><em>Hint:</em> if I were you, I would explore the various options of the <a href="https://www.cog-genomics.org/plink/1.9/data#recode">--recode</a> option on the website. <em>wink-wink</em></p>
+<p>As always, you can compare your solution to the one on YouTube. The video also contains some bonus information on related problems you might face during analyses, so make sure to check it out regardless.</p>
+<p>If the embedded video does not start, click it again to &quot;Watch on YouTube&quot;. Direct link: <a href="https://www.youtube.com/watch?v=c1LSFiv9CxY" class="uri">https://www.youtube.com/watch?v=c1LSFiv9CxY</a></p>
+<iframe src="https://www.youtube.com/embed/c1LSFiv9CxY" width="672" height="400px">
+</iframe>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="genotype-files-in-practice.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="genotype-data-quality-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-snp-data-basics.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Genomics Boot Camp.pdf", "Genomics Boot Camp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

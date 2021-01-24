@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Technical preparations | Genomics Boot Camp</title>
+  <meta name="description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Technical preparations | Genomics Boot Camp" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Technical preparations | Genomics Boot Camp" />
+  
+  <meta name="twitter:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+<meta name="author" content="Gábor Mészáros" />
+
+
+<meta name="date" content="2021-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="basic-software.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Genomics Boot Camp</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hello and welcome!</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>1.2</b> Copyright</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="technical-preparations.html"><a href="technical-preparations.html"><i class="fa fa-check"></i><b>2</b> Technical preparations</a><ul>
+<li class="chapter" data-level="2.1" data-path="technical-preparations.html"><a href="technical-preparations.html#overall-recommendations-tips-and-tricks"><i class="fa fa-check"></i><b>2.1</b> Overall recommendations, tips and tricks</a></li>
+<li class="chapter" data-level="2.2" data-path="technical-preparations.html"><a href="technical-preparations.html#file-naming-conventions"><i class="fa fa-check"></i><b>2.2</b> File naming conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basic-software.html"><a href="basic-software.html"><i class="fa fa-check"></i><b>3</b> Basic software</a><ul>
+<li class="chapter" data-level="3.1" data-path="basic-software.html"><a href="basic-software.html#text-editors"><i class="fa fa-check"></i><b>3.1</b> Text Editors</a></li>
+<li class="chapter" data-level="3.2" data-path="basic-software.html"><a href="basic-software.html#file-management"><i class="fa fa-check"></i><b>3.2</b> File management</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html"><i class="fa fa-check"></i><b>4</b> PLINK - Software for genomic analyses</a><ul>
+<li class="chapter" data-level="4.1" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>5</b> R and RStudio</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#getting-r-and-r-studio"><i class="fa fa-check"></i><b>5.1</b> Getting R and R Studio</a></li>
+<li class="chapter" data-level="5.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#how-to-use-r-studio"><i class="fa fa-check"></i><b>5.2</b> How to use R Studio</a></li>
+<li class="chapter" data-level="5.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#excercise"><i class="fa fa-check"></i><b>5.3</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html"><i class="fa fa-check"></i><b>6</b> Genotype files in practice</a><ul>
+<li class="chapter" data-level="6.1" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#fam-file---info-on-individuals"><i class="fa fa-check"></i><b>6.1</b> Fam file - Info on individuals</a></li>
+<li class="chapter" data-level="6.2" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bim-file---snp-location-info"><i class="fa fa-check"></i><b>6.2</b> Bim file - SNP location info</a></li>
+<li class="chapter" data-level="6.3" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bed-file---individual-genotypes"><i class="fa fa-check"></i><b>6.3</b> Bed file - Individual genotypes</a></li>
+<li class="chapter" data-level="6.4" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#excercise-1"><i class="fa fa-check"></i><b>6.4</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html"><i class="fa fa-check"></i><b>7</b> Your first PLINK tutorial</a><ul>
+<li class="chapter" data-level="7.1" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-plink-options"><i class="fa fa-check"></i><b>7.1</b> The PLINK options</a></li>
+<li class="chapter" data-level="7.2" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-ped-and-map-file-format"><i class="fa fa-check"></i><b>7.2</b> The ped and map file format</a></li>
+<li class="chapter" data-level="7.3" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#how-to-run-plink-from-r"><i class="fa fa-check"></i><b>7.3</b> How to run PLINK from R</a></li>
+<li class="chapter" data-level="7.4" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#exercise-1"><i class="fa fa-check"></i><b>7.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html"><i class="fa fa-check"></i><b>8</b> Genotype data quality control</a><ul>
+<li class="chapter" data-level="8.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#a-toy-example"><i class="fa fa-check"></i><b>8.1</b> A toy example</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-snp"><i class="fa fa-check"></i><b>8.1.1</b> Missingness per SNP</a></li>
+<li class="chapter" data-level="8.1.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-individual"><i class="fa fa-check"></i><b>8.1.2</b> Missingness per individual</a></li>
+<li class="chapter" data-level="8.1.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#minor-allele-frequency"><i class="fa fa-check"></i><b>8.1.3</b> Minor allele frequency</a></li>
+<li class="chapter" data-level="8.1.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#adherence-to-hardy-weinberg-distribution"><i class="fa fa-check"></i><b>8.1.4</b> Adherence to Hardy-Weinberg distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#how-qc-works-in-plink"><i class="fa fa-check"></i><b>8.2</b> How QC works in PLINK</a></li>
+<li class="chapter" data-level="8.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exceptions-from-snp-quality-control"><i class="fa fa-check"></i><b>8.3</b> Exceptions from SNP quality control</a></li>
+<li class="chapter" data-level="8.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exercise-2"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>9</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="9.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#run-a-pca-in-r"><i class="fa fa-check"></i><b>9.1</b> Run a PCA in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-script"><i class="fa fa-check"></i><b>9.1.1</b> PCA in R - The script</a></li>
+<li class="chapter" data-level="9.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-explanation"><i class="fa fa-check"></i><b>9.1.2</b> PCA in R - The explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#visualize-pca-results"><i class="fa fa-check"></i><b>9.2</b> Visualize PCA results</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-script"><i class="fa fa-check"></i><b>9.2.1</b> PCA visualization - The script</a></li>
+<li class="chapter" data-level="9.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-explanation"><i class="fa fa-check"></i><b>9.2.2</b> PCA visualization - The explanation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---comparison-to-published-results"><i class="fa fa-check"></i><b>9.2.3</b> PCA visualization - Comparison to published results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#exercise-summary"><i class="fa fa-check"></i><b>9.3</b> <del>Exercise</del> Summary</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics Boot Camp</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="technical-preparations" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Technical preparations</h1>
+<blockquote>
+<p><strong>Learning outcomes</strong> At the end of this chapter, you will be able to recognize and avoid some of the most common mistakes in storing and handling data. You will be able to name your files in a proper way and to avoid potential future problems.</p>
+</blockquote>
+<div id="overall-recommendations-tips-and-tricks" class="section level2">
+<h2><span class="header-section-number">2.1</span> Overall recommendations, tips and tricks</h2>
+<p>The motivation to write this section comes from my previous experiences of the MSc level course I teach on Management and analysis of high-density genomic data. During the lectures, I met students who in the follow-up weeks became very versatile in simple analyses of genomic data. So this was great! Most of them however had some pretty awful habits when it came to their practices in data handling and storage. The previous statement is less about criticism and more of a note that the conventional user of a computer, especially on a Windows machine is just spoiled. Everything works! We do not even need to think where our files are, as we get there in a few clicks, or in the worst case we use the built-in search functions.</p>
+<p>You can, and <strong>you have to do better</strong> if you are even half serious about genomic data analysis. This part will answer the questions of what can you improve and what are the &quot;best&quot; ways to do that.</p>
+<p>So let us consider a typical case: Student X is interested in genomic data analysis and jumps right at the later chapters of this book. They create a new folder on the Windows desktop called &quot;Genomic data analysis&quot;, where all data from all lectures gets copied, including programs and scripts they write. This way they will know where things are, should they ever need them again. There are multiple problems with this approach. Let's see what these problems are and how could be improved:</p>
+<p><strong>Do not store anything on the desktop</strong></p>
+<ul>
+<li>Although it seems to be so close visually, the files on the Windows desktop are deeper in the computer's file structure. This might then introduce unnecessary complexity in your scripts when it comes to the definition of the file PATH</li>
+<li>The easy point and click access also means that it is more easily deleted by an accident by you or others (the danger is especially high during home office sessions if there are small children around)</li>
+</ul>
+<p><strong>Do not store anything of importance on the system drive (usually C:)</strong></p>
+<ul>
+<li>In case of major problems this drive is the one that gets wiped first, so to avoid future hassle just avoid having anything there that you care about</li>
+</ul>
+<p><strong>In case your computer has only a single drive - Use Backup</strong></p>
+<ul>
+<li>I can not stress enough how the backup of all important files. Even for the less important ones is absolutely crucial!</li>
+<li>The C: drive can go down in a system failure, virus, or similar, but your work is not safe on other drives either</li>
+<li>External hard drives and USB sticks are not a solution! These break down and get lost surprisingly easily, so arguably they are even worse than your laptop's drive</li>
+<li>My strong suggestion is to use cloud storage services - even the free options give you enough space to keep your work safe</li>
+</ul>
+<p><strong>Smart strategies to utilize cloud storage</strong></p>
+<ul>
+<li>Let's say you go on with the free version of your favorite service, which is typically not enough to store large amounts of data</li>
+<li>You can use the cloud storage for your script files and other documents you write - these are typically very small files into which you invested a lot of your time. So they are on the top of your list when it comes to protection</li>
+<li>You can even store crucial genotype data in a binary ped format (more on this later) which takes a very little HDD space</li>
+</ul>
+<p><strong>One project - one folder</strong></p>
+<ul>
+<li>Unlike Student X, do not dump everything into one folder! It seems intuitive if you have one, maybe two things to analyze, but you quickly lose track afterward</li>
+<li>As you will see in the future analyses, the programs tend to produce a lot of temporary files, or just files that you do not need. You might be even deleting some of them. In this process, it is way too easy to delete your script files, or pieces of the input data as well. ...and Pooof! there goes your whole day effort to put something meaningful together!</li>
+<li>Of course, this does not apply if you set your recycle bin not to hard delete files right away, so ensure it is set this way.</li>
+<li>Even if you do and kept my previous advice on cloud storage, you can use the &quot;undelete&quot; function of the Windows recycle bin to save the day</li>
+<li>But even these Get-out-of-jail-free-cards do not solve our main problem of being lost and confused if you have 15 types of analyses in a folder, so just stick to the one folder per project</li>
+</ul>
+<p><strong>Use folders within folders</strong></p>
+<ul>
+<li>Yes! You can even do more and better by a standard internal organization of your folder structures</li>
+<li>There is a lot of room for experimentation and individual flavors here, but the two things I would suggest</li>
+</ul>
+<p>** Folder for script files: These could be stored literally anywhere on your computer and still work with any other data via a correctly set PATH, so you might just store them in a secure (Backupped!) place. ** Folder for the original data: I like to keep separate original and untouched data in its own folder. If anything happens during the analyses (and trust me, a lot of very unexpected things tend to happen), I can recreate everything with the original data and the saved script files.</p>
+<p><strong>Use descriptive and appropriate names for your files and folders</strong></p>
+<ul>
+<li>This is a topic on its own with a lot of issues to unpack, so it is described in detail in the <a href="technical-preparations.html#file-naming-conventions">File naming conventions</a> part below.</li>
+<li>To keep it short here, Student X in our example case just sets themself up for future problems using spaces in folder names, as this could backfire in unexpected ways. So don't use spaces in filenames.</li>
+<li>Also, the name of the folder does not tell anything about its contents. You can spare yourself quite a bit of time in the future to take a bit of time now and give a very descriptive name with an obvious link to the content, e.g. &quot;2020_pcaAustrianLeonbergerDogs&quot;.</li>
+</ul>
+<p>So these were my tips and tricks that you could consider when starting out. They are based on my own experiences and the approaches I commonly use. If you have other similar tips to share or discuss the ones presented here, let me know via <a href="https://twitter.com/GaborM_ABG">my Twitter</a>.</p>
+</div>
+<div id="file-naming-conventions" class="section level2">
+<h2><span class="header-section-number">2.2</span> File naming conventions</h2>
+<p>In this part of the Genomics Boot Camp, I want to elaborate on what the PATH is, why is it useful for you to know about it, and what to keep in mind when analyzing any kind of data. So first things first. The PATH (written in all caps) is not the name of some sketchy religious organization, but the set of directories where your executable files or data are located. You can think of it as the address of the files on your computer.</p>
+<p>In most of the programs, you will work with you will have to specify file locations on your computer. Therefore, it is good to know how does it work and what conventions to follow, to avoid future problems.</p>
+<p>There is a lot of freedom for self-expression and to include your own spins and flavors when it comes to naming anything on your computer, but there are a few basic rules you should abide by.</p>
+<p><strong>Select a good location for your files</strong></p>
+<p>As I suggested before in the <a href="technical-preparations.html#overall-recommendations-tips-and-tricks">Overall recommendations, tips and tricks</a>, it is a good thing to store your files outside the system drive. In particular, the Desktop should be avoided, as it includes your username, which can be tricky sometimes. It might violate some of the rules established below.</p>
+<p><strong>No spaces in file and folder names</strong></p>
+<p>This by far the most common violation of good practices, when it comes to beginner learners. Some programs became more forgiving in this aspect, but avoiding spaces in names can spare you quite some headaches on your data analysis journey.</p>
+<p><strong>No special characters in filenames</strong></p>
+<p>The most common case here is punctuation and brackets, but also special characters of the various languages. My rule is to use only letters available on the English keyboard.</p>
+<p><strong>Use descriptive names</strong></p>
+<p>Upon the first glance at the name of any file or folder, it should be obvious to you (and any other person) what it contains. In this respect names like &quot;final data&quot; or &quot;a.txt&quot; are pretty good examples, what not to do. Try to give it a spin that falls into your flavor of naming things, but also keeps the required amount of clarity.</p>
+<p><strong>Naming conventions</strong></p>
+<p>As for me, I like to use a combined system that sort of evolved as I went along. For example, I have a folder for a project I work on called &quot;2015_Appear_LocaBreed&quot;. There are several things to talk about here.</p>
+<p>When it comes to folder names, I picked up the habit of starting with a number, which makes it easier to sort the folders and follow a certain established logic. In the case of projects (as in the example), papers or analyses I like to start with the year. This could be also a sequential number, e.g. a series of folders for paper submissions called &quot;1_draft&quot;, &quot;2_submission&quot;, &quot;3_review&quot;</p>
+<p>You have surely noticed that none of these names contain any space, but still are fairly easily readable. This is due to the naming conventions used in these examples. And you can do it too!</p>
+<p>Let's consider another example of a folder name:</p>
+<p>sheepdiversityprojectlapampaargentina</p>
+<p>The name is ok, but the readability is pretty horrible. We can improve it a ton just by capitalizing the first letter in each word.</p>
+<p>SheepDiversityProjectLaPampaArgentina</p>
+<p>Much better, I believe! Still, we could add a few improvements. If you have more similar folders at the same place, it might make sense to add the relevant year. Also, one might argue that this particular name is quite long, so we can break it a little bit by adding underscores.</p>
+<p>2022_SheepDiversityProject_LaPampaArgentina</p>
+<p>Even better! This is of course from my own perspective. You are free to spin your own naming conventions around and experiment. There is also a lot of guidelines on this available on the web that give helpful suggestions. A nice and extensive <a href="https://www.huridocs.org/2016/07/file-naming-conventions-why-you-want-them-and-how-to-create-them/">summary can be found here</a>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-software.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-technical-preparations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Genomics Boot Camp.pdf", "Genomics Boot Camp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

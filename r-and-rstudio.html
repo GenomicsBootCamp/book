@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 R and RStudio | Genomics Boot Camp</title>
+  <meta name="description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 R and RStudio | Genomics Boot Camp" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 R and RStudio | Genomics Boot Camp" />
+  
+  <meta name="twitter:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+<meta name="author" content="Gábor Mészáros" />
+
+
+<meta name="date" content="2021-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="plink-software-for-genomic-analyses.html"/>
+<link rel="next" href="genotype-files-in-practice.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Genomics Boot Camp</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hello and welcome!</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>1.2</b> Copyright</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="technical-preparations.html"><a href="technical-preparations.html"><i class="fa fa-check"></i><b>2</b> Technical preparations</a><ul>
+<li class="chapter" data-level="2.1" data-path="technical-preparations.html"><a href="technical-preparations.html#overall-recommendations-tips-and-tricks"><i class="fa fa-check"></i><b>2.1</b> Overall recommendations, tips and tricks</a></li>
+<li class="chapter" data-level="2.2" data-path="technical-preparations.html"><a href="technical-preparations.html#file-naming-conventions"><i class="fa fa-check"></i><b>2.2</b> File naming conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basic-software.html"><a href="basic-software.html"><i class="fa fa-check"></i><b>3</b> Basic software</a><ul>
+<li class="chapter" data-level="3.1" data-path="basic-software.html"><a href="basic-software.html#text-editors"><i class="fa fa-check"></i><b>3.1</b> Text Editors</a></li>
+<li class="chapter" data-level="3.2" data-path="basic-software.html"><a href="basic-software.html#file-management"><i class="fa fa-check"></i><b>3.2</b> File management</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html"><i class="fa fa-check"></i><b>4</b> PLINK - Software for genomic analyses</a><ul>
+<li class="chapter" data-level="4.1" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>5</b> R and RStudio</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#getting-r-and-r-studio"><i class="fa fa-check"></i><b>5.1</b> Getting R and R Studio</a></li>
+<li class="chapter" data-level="5.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#how-to-use-r-studio"><i class="fa fa-check"></i><b>5.2</b> How to use R Studio</a></li>
+<li class="chapter" data-level="5.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#excercise"><i class="fa fa-check"></i><b>5.3</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html"><i class="fa fa-check"></i><b>6</b> Genotype files in practice</a><ul>
+<li class="chapter" data-level="6.1" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#fam-file---info-on-individuals"><i class="fa fa-check"></i><b>6.1</b> Fam file - Info on individuals</a></li>
+<li class="chapter" data-level="6.2" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bim-file---snp-location-info"><i class="fa fa-check"></i><b>6.2</b> Bim file - SNP location info</a></li>
+<li class="chapter" data-level="6.3" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bed-file---individual-genotypes"><i class="fa fa-check"></i><b>6.3</b> Bed file - Individual genotypes</a></li>
+<li class="chapter" data-level="6.4" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#excercise-1"><i class="fa fa-check"></i><b>6.4</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html"><i class="fa fa-check"></i><b>7</b> Your first PLINK tutorial</a><ul>
+<li class="chapter" data-level="7.1" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-plink-options"><i class="fa fa-check"></i><b>7.1</b> The PLINK options</a></li>
+<li class="chapter" data-level="7.2" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-ped-and-map-file-format"><i class="fa fa-check"></i><b>7.2</b> The ped and map file format</a></li>
+<li class="chapter" data-level="7.3" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#how-to-run-plink-from-r"><i class="fa fa-check"></i><b>7.3</b> How to run PLINK from R</a></li>
+<li class="chapter" data-level="7.4" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#exercise-1"><i class="fa fa-check"></i><b>7.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html"><i class="fa fa-check"></i><b>8</b> Genotype data quality control</a><ul>
+<li class="chapter" data-level="8.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#a-toy-example"><i class="fa fa-check"></i><b>8.1</b> A toy example</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-snp"><i class="fa fa-check"></i><b>8.1.1</b> Missingness per SNP</a></li>
+<li class="chapter" data-level="8.1.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-individual"><i class="fa fa-check"></i><b>8.1.2</b> Missingness per individual</a></li>
+<li class="chapter" data-level="8.1.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#minor-allele-frequency"><i class="fa fa-check"></i><b>8.1.3</b> Minor allele frequency</a></li>
+<li class="chapter" data-level="8.1.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#adherence-to-hardy-weinberg-distribution"><i class="fa fa-check"></i><b>8.1.4</b> Adherence to Hardy-Weinberg distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#how-qc-works-in-plink"><i class="fa fa-check"></i><b>8.2</b> How QC works in PLINK</a></li>
+<li class="chapter" data-level="8.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exceptions-from-snp-quality-control"><i class="fa fa-check"></i><b>8.3</b> Exceptions from SNP quality control</a></li>
+<li class="chapter" data-level="8.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exercise-2"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>9</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="9.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#run-a-pca-in-r"><i class="fa fa-check"></i><b>9.1</b> Run a PCA in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-script"><i class="fa fa-check"></i><b>9.1.1</b> PCA in R - The script</a></li>
+<li class="chapter" data-level="9.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-explanation"><i class="fa fa-check"></i><b>9.1.2</b> PCA in R - The explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#visualize-pca-results"><i class="fa fa-check"></i><b>9.2</b> Visualize PCA results</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-script"><i class="fa fa-check"></i><b>9.2.1</b> PCA visualization - The script</a></li>
+<li class="chapter" data-level="9.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-explanation"><i class="fa fa-check"></i><b>9.2.2</b> PCA visualization - The explanation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---comparison-to-published-results"><i class="fa fa-check"></i><b>9.2.3</b> PCA visualization - Comparison to published results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#exercise-summary"><i class="fa fa-check"></i><b>9.3</b> <del>Exercise</del> Summary</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics Boot Camp</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-and-rstudio" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> R and RStudio</h1>
+<blockquote>
+<p>Learning outcomes At the end of this chapter you will be able to install R and R Studio as your integrated work environment for data processing and visualization.</p>
+</blockquote>
+<p>Before going forward with the analysis of genomic data, I would advise you to do one more step. You see... Your overall goal is to make sense of your genomic data by computing certain statistics (depending on the goal of the study) and visualize the results. Now, PLINK can compute many things, but surely not everything. So you probably need something else in addition. Also, PLINK lacks any visualization capacities, so you surely need something else for the visuals.</p>
+<p>Here, my advice is to find an integrated work environment that could do both computation and visualization for a wide range of analyses. Of course, you can venture out to the World Wide Web, and/or ask your colleagues for their recommendations. Your final choice could depend on your previous experiences, or those of your colleagues and friends, or even the routines at your workplace. With this choice, there is no &quot;one size fits all&quot; solution.</p>
+<p>My recommendation is to use the R programming language. It is easy to use even for beginners, it is freely available, with a lot of packages for an extremely diverse range of methodologies. In addition, it could be used as a universal environment to run all your code (including PLINK), so you do not need to copy-paste commands, move around files, or other such error-prone shenanigans.</p>
+<p>In the following part of this chapter, you will see how to install the R work environment (four easy steps), briefly discuss how said R work environment looks like. An example of use is demonstrated in the <a href="your-first-plink-tutorial.html#your-first-plink-tutorial">Your first PLINK tutorial</a> chapter that shows how to run PLINK from R.</p>
+<div id="getting-r-and-r-studio" class="section level2">
+<h2><span class="header-section-number">5.1</span> Getting R and R Studio</h2>
+<p>The <em>R programming language</em> comes along in a program that should be downloaded and installed on your computer. To be very honest here, the native form does not look so nice. It is essentially a command-line interface that might not be friendly to beginner users (read: it is not beginner-friendly at all). With time, you will get used to it, but if you are at a stage figuring out what a &quot;working directory&quot; is, you probably appreciate all the visual help and aid you can get.</p>
+<p>The <em>R studio</em> is a huge improvement in this regard. It provides clickable insight to data, shows your script, work environment, graphs, and help files, all on one screen. It is the work environment you use to make your life easier.</p>
+<p>So how to get these two beauties:</p>
+<ol style="list-style-type: decimal">
+<li><p>Go to the <a href="https://www.r-project.org/">R Project website</a> and click the Download link on top of the left pane. After choosing a preferred mirror site, proceed to download the R for your operating system, Windows, Mac, or Linux.</p></li>
+<li><p>Install R from the downloaded file. You will be asked a bunch of questions during the process, but you are fine to click just &quot;Next&quot; all the time.</p></li>
+<li><p>Go to the <a href="https://rstudio.com/products/rstudio/download/">R Studio website</a> and download the program. You will see that there are paid versions as well, but the free version will be more than enough for you. I am using this for many years now.</p></li>
+<li><p>Install R Studio from the downloaded file. Again, the default settings should be good to go.</p></li>
+</ol>
+</div>
+<div id="how-to-use-r-studio" class="section level2">
+<h2><span class="header-section-number">5.2</span> How to use R Studio</h2>
+<p>After opening R Studio, you will see a similar layout as shown in the picture below.</p>
+<div class="figure"><span id="fig:fig5-1"></span>
+<img src="images/5-1-RStudioLayout.png" alt="The layout of R Studio: 1. Script editor; 2. R console; 3. Environment; 4. Help and graphs" width="312" />
+<p class="caption">
+Figure 5.1: The layout of R Studio: 1. Script editor; 2. R console; 3. Environment; 4. Help and graphs
+</p>
+</div>
+<p>The program itself can do a lot of things, but for now, you are fine to know about the main parts. For your convenience, I numbered them and will explain them briefly.</p>
+<ol style="list-style-type: decimal">
+<li><p>The part on the top left is the script editor that has an integrated syntax-highlighting feature. This means that comment lines, function names, and similar are distinguished with different colors. Moreover, you can run the script directly from here, so no copy-pasting is required. As you see, you can have multiple tabs opened at the same time as well. At a fresh install this part may not be visible, so just click File &gt; New File &gt; R Script to get to this stage.</p></li>
+<li><p>On the bottom left is the R console itself. This is the actual R that you have installed previously. Here you can also see how your script performs, or if there are any warning or error messages to take care of.</p></li>
+<li><p>On the top right there are multiple tabs. The most important one is the &quot;Environment&quot;, which will show any data and variables you will work with. The data sets are also clickable, so if you want to see them, just click and these will be displayed in the top left part.</p></li>
+<li><p>On the bottom right there are also multiple tabs. Two of them are of particular interest. The first one being the &quot;Help&quot; tab, which is also displayed in the picture. You see... All R functions come with a help file, which you need to consult if you want to run any kind of analysis. The other tab of interest is &quot;Plots&quot;, which will show you any visualizations you have created during your work.</p></li>
+</ol>
+</div>
+<div id="excercise" class="section level2">
+<h2><span class="header-section-number">5.3</span> Excercise</h2>
+<p>The exercise for this topic will be about the exploration of what R can do. The short answer: (almost) everything. Long answer: There is a lot of books and other resources written about it.</p>
+<p>From the data analysis and visualization perspective, one of the options is to use the so-called tidyverse packages. This part of R is still relatively new and constantly developing. Still, if you are new to R, or you have experience &quot;just&quot; with the base R, I warmly recommend checking it out.</p>
+<p>So what you need to do:</p>
+<ol style="list-style-type: decimal">
+<li><p>Install tidyverse. We did not go into details about package installation, but I firmly believe you can do it! Also, there is help all around.</p></li>
+<li><p>Check out the <a href="https://r4ds.had.co.nz/">R for Data Science book</a>, available for free, online. This is not about genomics, but rather on the use of R and tidyverse for data visualization and modification. There are also notes on the tidyverse installation there (chapter 3.1.1).</p></li>
+</ol>
+<p>As always, you are encouraged to check out the YouTube video (below) to compare your solutions with me and for some bonus material on the topic.</p>
+<p>If the embedded video does not start, click it again to &quot;Watch on YouTube&quot;. Direct link: <a href="https://www.youtube.com/watch?v=nKLqqkWWyA0" class="uri">https://www.youtube.com/watch?v=nKLqqkWWyA0</a></p>
+<iframe src="https://www.youtube.com/embed/nKLqqkWWyA0" width="672" height="400px">
+</iframe>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="plink-software-for-genomic-analyses.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="genotype-files-in-practice.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-software-and-tutorial.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Genomics Boot Camp.pdf", "Genomics Boot Camp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

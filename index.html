@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Genomics Boot Camp</title>
+  <meta name="description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Genomics Boot Camp" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Genomics Boot Camp" />
+  
+  <meta name="twitter:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+<meta name="author" content="Gábor Mészáros" />
+
+
+<meta name="date" content="2021-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="technical-preparations.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Genomics Boot Camp</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hello and welcome!</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>1.2</b> Copyright</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="technical-preparations.html"><a href="technical-preparations.html"><i class="fa fa-check"></i><b>2</b> Technical preparations</a><ul>
+<li class="chapter" data-level="2.1" data-path="technical-preparations.html"><a href="technical-preparations.html#overall-recommendations-tips-and-tricks"><i class="fa fa-check"></i><b>2.1</b> Overall recommendations, tips and tricks</a></li>
+<li class="chapter" data-level="2.2" data-path="technical-preparations.html"><a href="technical-preparations.html#file-naming-conventions"><i class="fa fa-check"></i><b>2.2</b> File naming conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basic-software.html"><a href="basic-software.html"><i class="fa fa-check"></i><b>3</b> Basic software</a><ul>
+<li class="chapter" data-level="3.1" data-path="basic-software.html"><a href="basic-software.html#text-editors"><i class="fa fa-check"></i><b>3.1</b> Text Editors</a></li>
+<li class="chapter" data-level="3.2" data-path="basic-software.html"><a href="basic-software.html#file-management"><i class="fa fa-check"></i><b>3.2</b> File management</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html"><i class="fa fa-check"></i><b>4</b> PLINK - Software for genomic analyses</a><ul>
+<li class="chapter" data-level="4.1" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>5</b> R and RStudio</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#getting-r-and-r-studio"><i class="fa fa-check"></i><b>5.1</b> Getting R and R Studio</a></li>
+<li class="chapter" data-level="5.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#how-to-use-r-studio"><i class="fa fa-check"></i><b>5.2</b> How to use R Studio</a></li>
+<li class="chapter" data-level="5.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#excercise"><i class="fa fa-check"></i><b>5.3</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html"><i class="fa fa-check"></i><b>6</b> Genotype files in practice</a><ul>
+<li class="chapter" data-level="6.1" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#fam-file---info-on-individuals"><i class="fa fa-check"></i><b>6.1</b> Fam file - Info on individuals</a></li>
+<li class="chapter" data-level="6.2" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bim-file---snp-location-info"><i class="fa fa-check"></i><b>6.2</b> Bim file - SNP location info</a></li>
+<li class="chapter" data-level="6.3" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bed-file---individual-genotypes"><i class="fa fa-check"></i><b>6.3</b> Bed file - Individual genotypes</a></li>
+<li class="chapter" data-level="6.4" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#excercise-1"><i class="fa fa-check"></i><b>6.4</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html"><i class="fa fa-check"></i><b>7</b> Your first PLINK tutorial</a><ul>
+<li class="chapter" data-level="7.1" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-plink-options"><i class="fa fa-check"></i><b>7.1</b> The PLINK options</a></li>
+<li class="chapter" data-level="7.2" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-ped-and-map-file-format"><i class="fa fa-check"></i><b>7.2</b> The ped and map file format</a></li>
+<li class="chapter" data-level="7.3" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#how-to-run-plink-from-r"><i class="fa fa-check"></i><b>7.3</b> How to run PLINK from R</a></li>
+<li class="chapter" data-level="7.4" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#exercise-1"><i class="fa fa-check"></i><b>7.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html"><i class="fa fa-check"></i><b>8</b> Genotype data quality control</a><ul>
+<li class="chapter" data-level="8.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#a-toy-example"><i class="fa fa-check"></i><b>8.1</b> A toy example</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-snp"><i class="fa fa-check"></i><b>8.1.1</b> Missingness per SNP</a></li>
+<li class="chapter" data-level="8.1.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-individual"><i class="fa fa-check"></i><b>8.1.2</b> Missingness per individual</a></li>
+<li class="chapter" data-level="8.1.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#minor-allele-frequency"><i class="fa fa-check"></i><b>8.1.3</b> Minor allele frequency</a></li>
+<li class="chapter" data-level="8.1.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#adherence-to-hardy-weinberg-distribution"><i class="fa fa-check"></i><b>8.1.4</b> Adherence to Hardy-Weinberg distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#how-qc-works-in-plink"><i class="fa fa-check"></i><b>8.2</b> How QC works in PLINK</a></li>
+<li class="chapter" data-level="8.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exceptions-from-snp-quality-control"><i class="fa fa-check"></i><b>8.3</b> Exceptions from SNP quality control</a></li>
+<li class="chapter" data-level="8.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exercise-2"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>9</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="9.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#run-a-pca-in-r"><i class="fa fa-check"></i><b>9.1</b> Run a PCA in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-script"><i class="fa fa-check"></i><b>9.1.1</b> PCA in R - The script</a></li>
+<li class="chapter" data-level="9.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-explanation"><i class="fa fa-check"></i><b>9.1.2</b> PCA in R - The explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#visualize-pca-results"><i class="fa fa-check"></i><b>9.2</b> Visualize PCA results</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-script"><i class="fa fa-check"></i><b>9.2.1</b> PCA visualization - The script</a></li>
+<li class="chapter" data-level="9.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-explanation"><i class="fa fa-check"></i><b>9.2.2</b> PCA visualization - The explanation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---comparison-to-published-results"><i class="fa fa-check"></i><b>9.2.3</b> PCA visualization - Comparison to published results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#exercise-summary"><i class="fa fa-check"></i><b>9.3</b> <del>Exercise</del> Summary</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics Boot Camp</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Genomics Boot Camp</h1>
+<p class="author"><em>Gábor Mészáros</em></p>
+<p class="date"><em>2021-01-24</em></p>
+</div>
+<div id="hello-and-welcome" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Hello and welcome!</h1>
+<p>If you are reading this, it means I managed to get everything into a publishable resource. If it is good enough that is up to you to judge, dear reader!</p>
+<p>The contents and the writing style of the book are based on my teaching experience of both theoretical background and practical data analysis skills to a wide range of learners, starting from MSc level, to PhD students and researchers of various overall experience in university and stand-alone post-doc courses. The people I talked to were similar. They were very interested to learn about the practical handling and analysis of single nucleotide polymorphism (SNP) data, but for some reason, they could not acquire enough practice, so far. Also, I noticed that regardless of seniority level they appreciated simple and straightforward examples, demonstrations, and in detail explanations of seemingly simple issues (e.g. why not to put space in a filename, what is the file path, and others). Indeed, these topics need to be discussed in detail to avoid unwelcome surprises later and enable to build a steady knowledge of SNP data analysis practice.</p>
+<p>This book and the affiliated <a href="https://www.youtube.com/channel/UCXuX-kQ1TbKHWeB75NgmhlA">Genomics Boot Camp YouTube channel</a> tries to follow this beginner friendly, detailed discussion approach. Of course, there is plenty of topics that could (and hopefully will) be discussed and shown, but for now, only a subset is appearing in any of the resources. The goal was to put together a resource on a need-to-know basis, presenting only the parts that are necessary to achieve the goal. In particular, I wanted to avoid the flood of information that might be interesting, might be even useful, but at that point is not really necessary. With this said, I plan to follow up with more topics that should cover all the basics, and with time even more sophisticated approaches.</p>
+<p>The Genomics Boot Camp is a resource that helps you to start your journey in practical analysis of genomic data, with a focus on SNP data. The chapters follow the same structure all the time: provide background information and practical insight to the topic, and when appropriate exercises to reinforce the obtained knowledge. The Genomics Boot Camp as a whole was designed to cater to various learning preferences with written text, video demonstrations, and the possibility of hands-on exercises. There is a certain overlap between the book and the YouTube channel contents, but each has unique pieces of information as well. So for the full experience, I suggest checking out both.</p>
+<p>The solutions for exercises are on the accompanying YouTube channel. Apart from the exercise solutions, the contents of the YouTube channel include more videos taking a deeper dive into more practical and theoretical aspects of genomics. Beginner friendly, of course!</p>
+<p>Due to the nature of genomics data and DNA being very similar in humans, animals, microbes and, plants, the methods and approaches presented in this book are usable for your favorite research organism. There is no previous data analysis knowledge required to start. The plan is that you acquire everything as you go along.</p>
+<div id="acknowledgements" class="section level2">
+<h2><span class="header-section-number">1.1</span> Acknowledgements</h2>
+<p>The visuals of is book are based on the bookdown-demo framework, by Yihui Xie.</p>
+</div>
+<div id="copyright" class="section level2">
+<h2><span class="header-section-number">1.2</span> Copyright</h2>
+<p>This book is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivs 4.0 License (CC BY-NC-ND 4.0)</a>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="technical-preparations.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Genomics Boot Camp.pdf", "Genomics Boot Camp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

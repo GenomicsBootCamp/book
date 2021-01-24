@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 PLINK - Software for genomic analyses | Genomics Boot Camp</title>
+  <meta name="description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 PLINK - Software for genomic analyses | Genomics Boot Camp" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 PLINK - Software for genomic analyses | Genomics Boot Camp" />
+  
+  <meta name="twitter:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+<meta name="author" content="Gábor Mészáros" />
+
+
+<meta name="date" content="2021-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basic-software.html"/>
+<link rel="next" href="r-and-rstudio.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Genomics Boot Camp</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hello and welcome!</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>1.2</b> Copyright</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="technical-preparations.html"><a href="technical-preparations.html"><i class="fa fa-check"></i><b>2</b> Technical preparations</a><ul>
+<li class="chapter" data-level="2.1" data-path="technical-preparations.html"><a href="technical-preparations.html#overall-recommendations-tips-and-tricks"><i class="fa fa-check"></i><b>2.1</b> Overall recommendations, tips and tricks</a></li>
+<li class="chapter" data-level="2.2" data-path="technical-preparations.html"><a href="technical-preparations.html#file-naming-conventions"><i class="fa fa-check"></i><b>2.2</b> File naming conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basic-software.html"><a href="basic-software.html"><i class="fa fa-check"></i><b>3</b> Basic software</a><ul>
+<li class="chapter" data-level="3.1" data-path="basic-software.html"><a href="basic-software.html#text-editors"><i class="fa fa-check"></i><b>3.1</b> Text Editors</a></li>
+<li class="chapter" data-level="3.2" data-path="basic-software.html"><a href="basic-software.html#file-management"><i class="fa fa-check"></i><b>3.2</b> File management</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html"><i class="fa fa-check"></i><b>4</b> PLINK - Software for genomic analyses</a><ul>
+<li class="chapter" data-level="4.1" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>5</b> R and RStudio</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#getting-r-and-r-studio"><i class="fa fa-check"></i><b>5.1</b> Getting R and R Studio</a></li>
+<li class="chapter" data-level="5.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#how-to-use-r-studio"><i class="fa fa-check"></i><b>5.2</b> How to use R Studio</a></li>
+<li class="chapter" data-level="5.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#excercise"><i class="fa fa-check"></i><b>5.3</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html"><i class="fa fa-check"></i><b>6</b> Genotype files in practice</a><ul>
+<li class="chapter" data-level="6.1" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#fam-file---info-on-individuals"><i class="fa fa-check"></i><b>6.1</b> Fam file - Info on individuals</a></li>
+<li class="chapter" data-level="6.2" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bim-file---snp-location-info"><i class="fa fa-check"></i><b>6.2</b> Bim file - SNP location info</a></li>
+<li class="chapter" data-level="6.3" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bed-file---individual-genotypes"><i class="fa fa-check"></i><b>6.3</b> Bed file - Individual genotypes</a></li>
+<li class="chapter" data-level="6.4" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#excercise-1"><i class="fa fa-check"></i><b>6.4</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html"><i class="fa fa-check"></i><b>7</b> Your first PLINK tutorial</a><ul>
+<li class="chapter" data-level="7.1" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-plink-options"><i class="fa fa-check"></i><b>7.1</b> The PLINK options</a></li>
+<li class="chapter" data-level="7.2" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-ped-and-map-file-format"><i class="fa fa-check"></i><b>7.2</b> The ped and map file format</a></li>
+<li class="chapter" data-level="7.3" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#how-to-run-plink-from-r"><i class="fa fa-check"></i><b>7.3</b> How to run PLINK from R</a></li>
+<li class="chapter" data-level="7.4" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#exercise-1"><i class="fa fa-check"></i><b>7.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html"><i class="fa fa-check"></i><b>8</b> Genotype data quality control</a><ul>
+<li class="chapter" data-level="8.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#a-toy-example"><i class="fa fa-check"></i><b>8.1</b> A toy example</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-snp"><i class="fa fa-check"></i><b>8.1.1</b> Missingness per SNP</a></li>
+<li class="chapter" data-level="8.1.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-individual"><i class="fa fa-check"></i><b>8.1.2</b> Missingness per individual</a></li>
+<li class="chapter" data-level="8.1.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#minor-allele-frequency"><i class="fa fa-check"></i><b>8.1.3</b> Minor allele frequency</a></li>
+<li class="chapter" data-level="8.1.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#adherence-to-hardy-weinberg-distribution"><i class="fa fa-check"></i><b>8.1.4</b> Adherence to Hardy-Weinberg distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#how-qc-works-in-plink"><i class="fa fa-check"></i><b>8.2</b> How QC works in PLINK</a></li>
+<li class="chapter" data-level="8.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exceptions-from-snp-quality-control"><i class="fa fa-check"></i><b>8.3</b> Exceptions from SNP quality control</a></li>
+<li class="chapter" data-level="8.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exercise-2"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>9</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="9.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#run-a-pca-in-r"><i class="fa fa-check"></i><b>9.1</b> Run a PCA in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-script"><i class="fa fa-check"></i><b>9.1.1</b> PCA in R - The script</a></li>
+<li class="chapter" data-level="9.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-explanation"><i class="fa fa-check"></i><b>9.1.2</b> PCA in R - The explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#visualize-pca-results"><i class="fa fa-check"></i><b>9.2</b> Visualize PCA results</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-script"><i class="fa fa-check"></i><b>9.2.1</b> PCA visualization - The script</a></li>
+<li class="chapter" data-level="9.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-explanation"><i class="fa fa-check"></i><b>9.2.2</b> PCA visualization - The explanation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---comparison-to-published-results"><i class="fa fa-check"></i><b>9.2.3</b> PCA visualization - Comparison to published results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#exercise-summary"><i class="fa fa-check"></i><b>9.3</b> <del>Exercise</del> Summary</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics Boot Camp</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="plink---software-for-genomic-analyses" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> PLINK - Software for genomic analyses</h1>
+<blockquote>
+<p>Learning outcomes At the end of this chapter you will be able to run one of the most popular programs in genomics - PLINK.</p>
+</blockquote>
+<p>You are almost ready to work with genomic data! The last thing before we take a deep dive into the world of genomics is to download a program to process everything (or at least most of the stuff) at this level.</p>
+<p>A quick question: What is the most efficient way to process any kind of genomic data?</p>
+<p>Answer: With a computer.</p>
+<p>This might seem like an obvious answer, but let me explain. As of now, the days are officially gone, when you opened a data file and made a graph from two highlighted columns in MS Excel. Just the sheer size of the data makes this impossible or highly inefficient. Not to mention the possibility of errors you might introduce with each manual edit. You might rightfully ask: &quot;But Gábor, you just told us to download some text editors in the <a href="basic-software.html#basic-software">Basic software</a> chapter to look at the data!&quot; Yes, I suggested some good text editors that you can use to look at the data, but not with the primary intent to change anything in it. So basically just to check the format before further processing. (Note: Later on, when you will know what you are doing, you can occasionally break the &quot;No manual edits!&quot; rule, at your own risk.)</p>
+<p>For processing and a wide variety of analyses, my firm suggestion is the <a href="https://www.cog-genomics.org/plink/">PLINK program</a> (written in all caps). This is an easy to use program that is very widespread in the genomics community, especially when it comes to single nucleotide polymorphism (SNP) data. I will talk about practical details on SNP data in the <a href="genotype-files-in-practice.html#genotype-files-in-practice">Genotype files in practice</a> chapter.</p>
+<p>For now, all you need is the program itself, and to ensure it works. You can do this in several steps: 1) <a href="https://www.cog-genomics.org/plink/">Download PLINK from the official website</a>, from the binary downloads section. You should go for the newest stable version. Keep in mind the operating system you want to use it on. The Windows executable on Mac will not work. 2) Unpack the zip file on your computer, and copy just the plink.exe file to the directory where you intend to do your analyses. There is no harm done if you copy everything, but you make an unnecessary mess in your analysis folder. Also, there is no installation needed. You will just run the program as it is, using specific parameters. 3) Navigate to the analysis directory, via the command prompt, called Terminal in Mac and shell, terminal, or console on Linux. This process is a little different in each operating system, but you will surely find the appropriate way. I am going to assume Windows 10 here.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Open the command prompt by typing cmd to the search bar and hit enter.</li>
+</ol>
+<div class="figure"><span id="fig:fig4-1"></span>
+<img src="images/4-1-cmdWinSearchBar.png" alt="The quickest way to access the commnad prompt in Windows 10" width="248" />
+<p class="caption">
+Figure 4.1: The quickest way to access the commnad prompt in Windows 10
+</p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>It opens on the system drive by default. If your analysis directory is on another drive you change it first. For example, mine is on the D drive, so I type d: (i.e. the drive letter and colon) and hit enter.</li>
+</ol>
+<div class="figure"><span id="fig:fig4-2"></span>
+<img src="images/4-2-cmdWindowPathChange.png" alt="How to change the HDD drive in command prompt (if required)" width="258" />
+<p class="caption">
+Figure 4.2: How to change the HDD drive in command prompt (if required)
+</p>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Navigate to the analysis directory using the cd (i.e. the change directory) command after which you type the name of the directory. Pro tip: Hitting the Tab key auto-fills the folder name. Try it out, it is really handy!</li>
+</ol>
+<div class="figure"><span id="fig:fig4-3"></span>
+<img src="images/4-3-cmdWindowPathChange2.png" alt="How to navigate to the working directory" width="255" />
+<p class="caption">
+Figure 4.3: How to navigate to the working directory
+</p>
+</div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Run the plink.exe program you copied there, as described in point 2. You can do this by simply typing: plink</li>
+</ol>
+<div class="figure"><span id="fig:fig4-4"></span>
+<img src="images/4-4-runPlink.png" alt="How to start PLINK" width="388" />
+<p class="caption">
+Figure 4.4: How to start PLINK
+</p>
+</div>
+<p>If your command prompt prints out the message you above you are good to go! Congratulations!</p>
+<p>At this point, PLINK does not do anything, because you did not include any data. We will include some data and much more in the following steps. Note to Linux and Mac users: You might need to run PLINK in your terminal as ./plink Note2 to Linux (and Mac?) users: Before the first run of the program you might need to make plink.exe executable.</p>
+<div id="exercise" class="section level2">
+<h2><span class="header-section-number">4.1</span> Exercise</h2>
+<p>It is a very useful approach to intentionally generate errors, so you see how the program reacts. This way is you make an unintentional error, you will see the same message as before, and you can react quicker. So for this time:</p>
+<p>Excercise 1) When trying to start PLINK, intentionally mistype the name, e.g. as pliiiink</p>
+<p>Excercise 2) Delete the PLINK executable file from the folder and try to run it as described in the 3d) description above</p>
+<p>The solutions and explanations to these exercises, with a bit of bonus content you will find on the accompanying YouTube channel.</p>
+<p>If the embedded video does not start, click it again to &quot;Watch on YouTube&quot;. Direct link: <a href="https://www.youtube.com/watch?v=4VL4z71Ht70" class="uri">https://www.youtube.com/watch?v=4VL4z71Ht70</a></p>
+<iframe src="https://www.youtube.com/embed/4VL4z71Ht70" width="672" height="400px">
+</iframe>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basic-software.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-and-rstudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-software-and-tutorial.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Genomics Boot Camp.pdf", "Genomics Boot Camp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

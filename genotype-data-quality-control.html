@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Genotype data quality control | Genomics Boot Camp</title>
+  <meta name="description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Genotype data quality control | Genomics Boot Camp" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Genotype data quality control | Genomics Boot Camp" />
+  
+  <meta name="twitter:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+<meta name="author" content="Gábor Mészáros" />
+
+
+<meta name="date" content="2021-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="your-first-plink-tutorial.html"/>
+<link rel="next" href="principal-component-analysis-pca.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Genomics Boot Camp</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hello and welcome!</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>1.2</b> Copyright</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="technical-preparations.html"><a href="technical-preparations.html"><i class="fa fa-check"></i><b>2</b> Technical preparations</a><ul>
+<li class="chapter" data-level="2.1" data-path="technical-preparations.html"><a href="technical-preparations.html#overall-recommendations-tips-and-tricks"><i class="fa fa-check"></i><b>2.1</b> Overall recommendations, tips and tricks</a></li>
+<li class="chapter" data-level="2.2" data-path="technical-preparations.html"><a href="technical-preparations.html#file-naming-conventions"><i class="fa fa-check"></i><b>2.2</b> File naming conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basic-software.html"><a href="basic-software.html"><i class="fa fa-check"></i><b>3</b> Basic software</a><ul>
+<li class="chapter" data-level="3.1" data-path="basic-software.html"><a href="basic-software.html#text-editors"><i class="fa fa-check"></i><b>3.1</b> Text Editors</a></li>
+<li class="chapter" data-level="3.2" data-path="basic-software.html"><a href="basic-software.html#file-management"><i class="fa fa-check"></i><b>3.2</b> File management</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html"><i class="fa fa-check"></i><b>4</b> PLINK - Software for genomic analyses</a><ul>
+<li class="chapter" data-level="4.1" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>5</b> R and RStudio</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#getting-r-and-r-studio"><i class="fa fa-check"></i><b>5.1</b> Getting R and R Studio</a></li>
+<li class="chapter" data-level="5.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#how-to-use-r-studio"><i class="fa fa-check"></i><b>5.2</b> How to use R Studio</a></li>
+<li class="chapter" data-level="5.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#excercise"><i class="fa fa-check"></i><b>5.3</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html"><i class="fa fa-check"></i><b>6</b> Genotype files in practice</a><ul>
+<li class="chapter" data-level="6.1" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#fam-file---info-on-individuals"><i class="fa fa-check"></i><b>6.1</b> Fam file - Info on individuals</a></li>
+<li class="chapter" data-level="6.2" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bim-file---snp-location-info"><i class="fa fa-check"></i><b>6.2</b> Bim file - SNP location info</a></li>
+<li class="chapter" data-level="6.3" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bed-file---individual-genotypes"><i class="fa fa-check"></i><b>6.3</b> Bed file - Individual genotypes</a></li>
+<li class="chapter" data-level="6.4" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#excercise-1"><i class="fa fa-check"></i><b>6.4</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html"><i class="fa fa-check"></i><b>7</b> Your first PLINK tutorial</a><ul>
+<li class="chapter" data-level="7.1" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-plink-options"><i class="fa fa-check"></i><b>7.1</b> The PLINK options</a></li>
+<li class="chapter" data-level="7.2" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-ped-and-map-file-format"><i class="fa fa-check"></i><b>7.2</b> The ped and map file format</a></li>
+<li class="chapter" data-level="7.3" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#how-to-run-plink-from-r"><i class="fa fa-check"></i><b>7.3</b> How to run PLINK from R</a></li>
+<li class="chapter" data-level="7.4" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#exercise-1"><i class="fa fa-check"></i><b>7.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html"><i class="fa fa-check"></i><b>8</b> Genotype data quality control</a><ul>
+<li class="chapter" data-level="8.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#a-toy-example"><i class="fa fa-check"></i><b>8.1</b> A toy example</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-snp"><i class="fa fa-check"></i><b>8.1.1</b> Missingness per SNP</a></li>
+<li class="chapter" data-level="8.1.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-individual"><i class="fa fa-check"></i><b>8.1.2</b> Missingness per individual</a></li>
+<li class="chapter" data-level="8.1.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#minor-allele-frequency"><i class="fa fa-check"></i><b>8.1.3</b> Minor allele frequency</a></li>
+<li class="chapter" data-level="8.1.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#adherence-to-hardy-weinberg-distribution"><i class="fa fa-check"></i><b>8.1.4</b> Adherence to Hardy-Weinberg distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#how-qc-works-in-plink"><i class="fa fa-check"></i><b>8.2</b> How QC works in PLINK</a></li>
+<li class="chapter" data-level="8.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exceptions-from-snp-quality-control"><i class="fa fa-check"></i><b>8.3</b> Exceptions from SNP quality control</a></li>
+<li class="chapter" data-level="8.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exercise-2"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>9</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="9.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#run-a-pca-in-r"><i class="fa fa-check"></i><b>9.1</b> Run a PCA in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-script"><i class="fa fa-check"></i><b>9.1.1</b> PCA in R - The script</a></li>
+<li class="chapter" data-level="9.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-explanation"><i class="fa fa-check"></i><b>9.1.2</b> PCA in R - The explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#visualize-pca-results"><i class="fa fa-check"></i><b>9.2</b> Visualize PCA results</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-script"><i class="fa fa-check"></i><b>9.2.1</b> PCA visualization - The script</a></li>
+<li class="chapter" data-level="9.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-explanation"><i class="fa fa-check"></i><b>9.2.2</b> PCA visualization - The explanation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---comparison-to-published-results"><i class="fa fa-check"></i><b>9.2.3</b> PCA visualization - Comparison to published results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#exercise-summary"><i class="fa fa-check"></i><b>9.3</b> <del>Exercise</del> Summary</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics Boot Camp</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="genotype-data-quality-control" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Genotype data quality control</h1>
+<blockquote>
+<p><strong>Learning outcomes:</strong> At the end of this chapter you will be able to filter out low-quality genotypes from your data using PLINK.</p>
+</blockquote>
+<p>At this point, you already know how the genomic data looks like (<a href="genotype-files-in-practice.html#genotype-files-in-practice">Genotype files in practice</a> chapter) and how to process it with PLINK (<a href="your-first-plink-tutorial.html#your-first-plink-tutorial">Your first PLINK tutorial</a> chapter). So it is reasonable to assume that you want to do some kind of real analysis at some point. But here I am to tell you: Do not rush it!</p>
+<p>Before you do any kind of analysis, you need to check the quality of your genotype data and delete the sketchy parts. The good old saying &quot;Garbage in, garbage out.&quot; is valid also here, so you want to avoid this by doing quality control (QC). This chapter will tell you how, why, and when to do certain moves.</p>
+<p>We will start with a toy example and then move to the implementation in PLINK.</p>
+<div id="a-toy-example" class="section level2">
+<h2><span class="header-section-number">8.1</span> A toy example</h2>
+<p>In this example, we will consider a data set with five individuals each of them genotyped for five SNPs. The genotypes themselves are in numerical coding, 11 and 22 being the two homozygous, 12 the heterozygous, and 00 coded as missing.</p>
+<div class="figure"><span id="fig:fig8-1"></span>
+<img src="images/8-1-qualityControlToyExample.png" alt="A small scale example for genotype quality control" width="475" />
+<p class="caption">
+Figure 8.1: A small scale example for genotype quality control
+</p>
+</div>
+<div id="missingness-per-snp" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> Missingness per SNP</h3>
+<p>Overall, the SNP genotyping platform is very reliable and delivers stable results when it comes to determining genotypes. Of course, it is not flawless. One of the most frequent problems is that some of the SNPs are just not well genotyped in the entire population. These should be removed to improve the overall data quality.</p>
+<p>Of course, we can not remove every SNP that has any missing value, as this way we would purge the entirety of our data. As a comproimse, we define thresholds instead. The funny thing about these thresholds is that no rule would firmly set which ones to use. So you are free to define them as long as you remain within &quot;reasonable&quot; bounds. To find out what &quot;reasonable&quot; means, it is perhaps a good idea to study the literature for your species of interest.</p>
+<p>In this toy example, we will go with a 20% threshold. In other words, we would delete any SNP with more than 20% missing SNPs. In our case, SNP2 would be deleted.</p>
+</div>
+<div id="missingness-per-individual" class="section level3">
+<h3><span class="header-section-number">8.1.2</span> Missingness per individual</h3>
+<p>The reliability of SNP chips is also high when it comes to individual genotypes. In some cases, however, some of the individuals contain a large number of missing SNPs. The reason could be low DNA sample quality, wrong chip type used (e.g. cattle chip for deer samples), or other technical issues. Regardless of the reason, you should delete the worst offenders from your data set, not to compromise the overall quality of your results.</p>
+<p>In our toy example, we go with a 30% threshold, which means that individual 4 is deleted.</p>
+<p>An interesting question is the follow-up of the quality control steps. If we would define a more conventional 10% threshold in our toy example, this would remove all genotypes. If we implement the filtering first by SNP (removing the problematic SNP2), and the filtering for individuals just after that, we are in much better shape.</p>
+</div>
+<div id="minor-allele-frequency" class="section level3">
+<h3><span class="header-section-number">8.1.3</span> Minor allele frequency</h3>
+<p>You can compute the proportion of any allele in any SNP based on the set of genotype data you have. For example in SNP4 we have five genotypes with a total of 10 alleles, four of them are Allele1 (40% or 0.4), and six of them Allele2 (60% or 0.6).</p>
+<p>The Allele occurring less frequently will be the so-called minor allele, and the proportion of its occurrence called minor allele frequency (MAF). In the case of SNP4, the Allele1 is the minor allele, with a frequency of 0.4.</p>
+<p>Limitations on the minor allele frequencies are done similarly as previously. You just define a number and every SNP with MAF below this number gets deleted. If you want to get rid only of the fixed SNPs, you specify a MAF threshold of 0.</p>
+</div>
+<div id="adherence-to-hardy-weinberg-distribution" class="section level3">
+<h3><span class="header-section-number">8.1.4</span> Adherence to Hardy-Weinberg distribution</h3>
+<p>The quality control based on Hardy-Weinberg (H-W) distribution is a bit trickier to explain. You might know the definition of <a href="https://www.khanacademy.org/science/biology/her/heredity-and-genetics/a/hardy-weinberg-mechanisms-of-evolution">the Hardy-Weinberg rule</a> from population genetics which states that genetic variation (thus allele and genotype frequencies) in a population will remain constant unless certain disturbing elements are introduced. This also means that when we know the allele frequencies for p and q, the genotype frequencies will be defined as p<sup>2</sup>, 2pq, and q<sup>2</sup>.</p>
+<p><strong>A more detailed example on Hardy-Weinberg limitation</strong></p>
+<p>Let's say the frequency of allele A (p in the equation)is 0.4, and that of allele B (q in the equation) is 0.6. This means for the H-W scenario the genotype frequencies will be 0.16 for AA, 0.48 for AB, and 0.36 for BB. This also means that in a population of e.g. 1000 individuals with the mentioned allele frequencies we expect to see 160 AA, 480 AB, and 360 BB individuals. Of course, we rarely see exact H-W distributions in real populations. The question then becomes, what is the extent of the difference between the expected H-W proportions in each SNP, and the observed proportions in the reality?</p>
+<p>The way to provide a threshold to exclude unwanted SNPs is via a p-value threshold. If the expected and observed genotype frequencies are &quot;equal&quot; based on an equilibrium exact test with the significance (p-value) you provide, the SNP is kept during the quality control. If there are large differences between the expected and observed frequencies, the SNP is deleted.</p>
+<p>From personal experience, I know that referring to p-values as &quot;high&quot; or &quot;low&quot; could be confusing, as you can never be too certain if this is meant as the numerical value or the strictness level (with lower p-values are being more strict). So to be very straightforward: you delete much more SNPs (i.e. you do a stricter QC) with the H-W significance threshold of e.g. 0.001 than if you set this to e.g. 0.000000001.</p>
+</div>
+</div>
+<div id="how-qc-works-in-plink" class="section level2">
+<h2><span class="header-section-number">8.2</span> How QC works in PLINK</h2>
+<p>The implementation of the quality control steps in PLINK is easy. Remember the line in <a href="your-first-plink-tutorial.html#your-first-plink-tutorial">Your first PLINK tutorial</a>? All you need to do is to include the corresponding PLINK options to that line with the quality control parameters of your choice. You could of course search for them on the options list I showed you, but for now, I am going to give you a head start:</p>
+<p>Missingness per SNP: <a href="https://www.cog-genomics.org/plink/1.9/filter#missing">--geno</a> <em>value</em></p>
+<p>Missingness per individual: <a href="https://www.cog-genomics.org/plink/1.9/filter#missing">--mind</a> <em>value</em></p>
+<p>Minor allele frequency: <a href="https://www.cog-genomics.org/plink/1.9/filter#maf">--maf</a> <em>value</em></p>
+<p>Hardy-Weinberg threshold: <a href="https://www.cog-genomics.org/plink/1.9/filter#hwe">--hwe</a> <em>value</em></p>
+<p>An additional very frequently used option is <a href="https://www.cog-genomics.org/plink/1.9/filter#autosome">--autosome</a>. By including this option you automatically keep only SNPs on the autosomal chromosomes. So any unplaced SNPs or those on the sex chromosomes get removed.</p>
+<p><strong>Caution!</strong> The --maf option is not considered in founder animals, i.e. those with unknown parents. Please note that the parentage information is many times skipped from data sets out of convenience or because it is not available. To include such animals in the quality control, use the <a href="https://www.cog-genomics.org/plink/1.9/filter#nonfounders">--nonfounders</a> option in your script.</p>
+</div>
+<div id="exceptions-from-snp-quality-control" class="section level2">
+<h2><span class="header-section-number">8.3</span> Exceptions from SNP quality control</h2>
+<p>When <em>NOT</em> to include certain parameters into the QC?</p>
+<p>Depending on the analysis you want to perform, you might not want to include some of the parameters mentioned above. This is because by doing so, you might be deleting the very results you are looking for.</p>
+<p>Let me explain...</p>
+<p>For example, you want to do anything with runs of homozygosity (ROH) - to look for long homozygous segments, that could be also fixed in the population. Implementing any kind of MAF filtering would get rid of fixed or highly homozygous SNPs. In the next step of your analysis, you would then proceed to look for fixed or highly homozygous regions on the genome... Ehm... You see how this went wrong, right?</p>
+<p>Another example is if you are interested to look for previously unmapped disorders via the approach called &quot;missing homozygosity&quot;. This method is based on the fact that you see much less homozygous genotypes for a certain allele compared to the expectations. The reason for the apparent lack of homozygotes might be because these alleles are in fact deleterious recessives. So any individual having them in homozygous form dies before it gets a chance to be genotyped. Of course, this also means that there will be an imbalance between observed and expected genotypes. The very result you are looking for! In case you apply the Hardy-Weinberg filtering however, you delete these from your records in the quality control step, as they are out of HWE expectations...</p>
+<p>So I hope you get the picture... Quality control is necessary, but a cautious implementation is advised.</p>
+</div>
+<div id="exercise-2" class="section level2">
+<h2><span class="header-section-number">8.4</span> Exercise</h2>
+<p>You made it to the end! Congratulations!</p>
+<p>You might have noticed that I did not give a full PLINK line on how to implement the QC to your existing script. That is because I want YOU to do it! That's right! This way you will reinforce your knowledge on QC and get a bit more practice with the implementation.</p>
+<p>Take the PLINK line from your first PLINK tutorial with the ADAPmap data, and extend it with the following QC parameters:</p>
+<p>Missingness per SNP: 0.1; Missingness per individual: 0.1; Minor allele frequency: 0.05</p>
+<p>The questions are: What was the number of animals and SNPs before and after quality control? How many individuals and SNPs were removed due to the different criteria? Optional: See what happens if you include also a Hardy-Weinberg threshold: 0.0000001</p>
+<p>As always, you can compare your solution with mine. In the video link below I discuss this exercise.</p>
+<p>If the embedded video does not start, click it again to &quot;Watch on YouTube&quot;. Direct link: <a href="https://www.youtube.com/watch?v=QR80Y0Xhrg4" class="uri">https://www.youtube.com/watch?v=QR80Y0Xhrg4</a></p>
+<iframe src="https://www.youtube.com/embed/QR80Y0Xhrg4" width="672" height="400px">
+</iframe>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="your-first-plink-tutorial.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="principal-component-analysis-pca.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-snp-data-basics.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Genomics Boot Camp.pdf", "Genomics Boot Camp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

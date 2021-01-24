@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Genotype files in practice | Genomics Boot Camp</title>
+  <meta name="description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Genotype files in practice | Genomics Boot Camp" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Genotype files in practice | Genomics Boot Camp" />
+  
+  <meta name="twitter:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+<meta name="author" content="Gábor Mészáros" />
+
+
+<meta name="date" content="2021-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-and-rstudio.html"/>
+<link rel="next" href="your-first-plink-tutorial.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Genomics Boot Camp</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hello and welcome!</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>1.2</b> Copyright</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="technical-preparations.html"><a href="technical-preparations.html"><i class="fa fa-check"></i><b>2</b> Technical preparations</a><ul>
+<li class="chapter" data-level="2.1" data-path="technical-preparations.html"><a href="technical-preparations.html#overall-recommendations-tips-and-tricks"><i class="fa fa-check"></i><b>2.1</b> Overall recommendations, tips and tricks</a></li>
+<li class="chapter" data-level="2.2" data-path="technical-preparations.html"><a href="technical-preparations.html#file-naming-conventions"><i class="fa fa-check"></i><b>2.2</b> File naming conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basic-software.html"><a href="basic-software.html"><i class="fa fa-check"></i><b>3</b> Basic software</a><ul>
+<li class="chapter" data-level="3.1" data-path="basic-software.html"><a href="basic-software.html#text-editors"><i class="fa fa-check"></i><b>3.1</b> Text Editors</a></li>
+<li class="chapter" data-level="3.2" data-path="basic-software.html"><a href="basic-software.html#file-management"><i class="fa fa-check"></i><b>3.2</b> File management</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html"><i class="fa fa-check"></i><b>4</b> PLINK - Software for genomic analyses</a><ul>
+<li class="chapter" data-level="4.1" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>5</b> R and RStudio</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#getting-r-and-r-studio"><i class="fa fa-check"></i><b>5.1</b> Getting R and R Studio</a></li>
+<li class="chapter" data-level="5.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#how-to-use-r-studio"><i class="fa fa-check"></i><b>5.2</b> How to use R Studio</a></li>
+<li class="chapter" data-level="5.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#excercise"><i class="fa fa-check"></i><b>5.3</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html"><i class="fa fa-check"></i><b>6</b> Genotype files in practice</a><ul>
+<li class="chapter" data-level="6.1" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#fam-file---info-on-individuals"><i class="fa fa-check"></i><b>6.1</b> Fam file - Info on individuals</a></li>
+<li class="chapter" data-level="6.2" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bim-file---snp-location-info"><i class="fa fa-check"></i><b>6.2</b> Bim file - SNP location info</a></li>
+<li class="chapter" data-level="6.3" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bed-file---individual-genotypes"><i class="fa fa-check"></i><b>6.3</b> Bed file - Individual genotypes</a></li>
+<li class="chapter" data-level="6.4" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#excercise-1"><i class="fa fa-check"></i><b>6.4</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html"><i class="fa fa-check"></i><b>7</b> Your first PLINK tutorial</a><ul>
+<li class="chapter" data-level="7.1" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-plink-options"><i class="fa fa-check"></i><b>7.1</b> The PLINK options</a></li>
+<li class="chapter" data-level="7.2" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-ped-and-map-file-format"><i class="fa fa-check"></i><b>7.2</b> The ped and map file format</a></li>
+<li class="chapter" data-level="7.3" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#how-to-run-plink-from-r"><i class="fa fa-check"></i><b>7.3</b> How to run PLINK from R</a></li>
+<li class="chapter" data-level="7.4" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#exercise-1"><i class="fa fa-check"></i><b>7.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html"><i class="fa fa-check"></i><b>8</b> Genotype data quality control</a><ul>
+<li class="chapter" data-level="8.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#a-toy-example"><i class="fa fa-check"></i><b>8.1</b> A toy example</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-snp"><i class="fa fa-check"></i><b>8.1.1</b> Missingness per SNP</a></li>
+<li class="chapter" data-level="8.1.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-individual"><i class="fa fa-check"></i><b>8.1.2</b> Missingness per individual</a></li>
+<li class="chapter" data-level="8.1.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#minor-allele-frequency"><i class="fa fa-check"></i><b>8.1.3</b> Minor allele frequency</a></li>
+<li class="chapter" data-level="8.1.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#adherence-to-hardy-weinberg-distribution"><i class="fa fa-check"></i><b>8.1.4</b> Adherence to Hardy-Weinberg distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#how-qc-works-in-plink"><i class="fa fa-check"></i><b>8.2</b> How QC works in PLINK</a></li>
+<li class="chapter" data-level="8.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exceptions-from-snp-quality-control"><i class="fa fa-check"></i><b>8.3</b> Exceptions from SNP quality control</a></li>
+<li class="chapter" data-level="8.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exercise-2"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>9</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="9.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#run-a-pca-in-r"><i class="fa fa-check"></i><b>9.1</b> Run a PCA in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-script"><i class="fa fa-check"></i><b>9.1.1</b> PCA in R - The script</a></li>
+<li class="chapter" data-level="9.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-explanation"><i class="fa fa-check"></i><b>9.1.2</b> PCA in R - The explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#visualize-pca-results"><i class="fa fa-check"></i><b>9.2</b> Visualize PCA results</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-script"><i class="fa fa-check"></i><b>9.2.1</b> PCA visualization - The script</a></li>
+<li class="chapter" data-level="9.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-explanation"><i class="fa fa-check"></i><b>9.2.2</b> PCA visualization - The explanation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---comparison-to-published-results"><i class="fa fa-check"></i><b>9.2.3</b> PCA visualization - Comparison to published results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#exercise-summary"><i class="fa fa-check"></i><b>9.3</b> <del>Exercise</del> Summary</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics Boot Camp</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="genotype-files-in-practice" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Genotype files in practice</h1>
+<blockquote>
+<p>Learning outcomes At the end of this chapter, you will be able to recognize and describe the format of SNP genotype files.</p>
+</blockquote>
+<p>In case you read this book from the beginning, you now have a good plan where to place your files and the support programs installed. You only need one more thing, and that is the data.</p>
+<p>So where you can get some?</p>
+<p>The good news is that due to journal and funding agency policies, and the general goodwill of various research teams there is a lot of SNP data available. For this introduction and also the follow-up demonstrations we will use the <a href="http://www.goatadaptmap.org/">AdaptMap</a> goat data set. This particular data set is linked to the publication <a href="https://gsejournal.biomedcentral.com/articles/10.1186/s12711-018-0421-y">Bertolini et al. (2018)</a></p>
+<blockquote>
+<p><a href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.v8g21pt">DOWNLOAD the data from here ~46MB</a></p>
+</blockquote>
+<p>In this post, you will see how the genomic data looks like in a PLINK format, and how to tell its basic characteristics just by looking at it. See!!! I told you the text editors will come in handy!</p>
+<p>Unpack the zip file you obtained from Dryad into your working directory. You should see something like this:</p>
+<div class="figure"><span id="fig:fig6-1"></span>
+<img src="images/6-1-AdaptMapGenotypeFiles.png" alt="The AdaptMap goat genotype files in PLINK format" width="306" />
+<p class="caption">
+Figure 6.1: The AdaptMap goat genotype files in PLINK format
+</p>
+</div>
+<p>The three files contain information on animals, SNP positions, and animals in a so-called PLINK &quot;binary ped&quot; format. This is one of the most standard formats of the data that is efficient for computation and storage space.</p>
+<p>Just by looking at the file names, you can see some special characteristics. The first one is that all three files have exactly the same name, and differing only in the file extension. This is on purpose. When you use the correct option in PLINK, you can refer to all three files just by using this common name, in this case, ADAPTmap_genotypeTOP_20160222_full. This is really handy!</p>
+<p>The second thing is maybe not so apparent, but once you have seen a few data sets, it will become obvious. What I mean is that the file extensions are not just some random names, but pre-defined ones from PLINK. Also, these three belong together, and while individual files alone could give you some information, all three are needed to analyze the data.</p>
+<p>A quick note here: technically it is possible to use any file name with the right options, but why would you complicate your life (also) with this? So I really suggest sticking to this naming convention, i.e. the same filename with .bim + .bed + .fam extensions.</p>
+<p>So it is time to open the files! As all the file formats are described on the PLINK webpage in detail, I would point out just the main things here, and mention a few additional nuggets of information from my experience that are not easily available elsewhere.</p>
+<div id="fam-file---info-on-individuals" class="section level2">
+<h2><span class="header-section-number">6.1</span> Fam file - Info on individuals</h2>
+<p>We start with ADAPTmap_genotypeTOP_20160222_full.fam which looks like this:</p>
+<div class="figure"><span id="fig:fig6-2"></span>
+<img src="images/6-2-AdaptMapFamFile.png" alt="The .fam file format layout" width="272" />
+<p class="caption">
+Figure 6.2: The .fam file format layout
+</p>
+</div>
+<p>You see that despite the funny file extension it is just a plain text file with six columns and no header. Each column has a very specific function that is described on the File formats webpage for .fam. What you need to know about the respective columns is the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>The first column is the family identification abbreviated as FID. As the PLINK software was primarily developed for genomic analyses in humans, which is reflected in the naming terminology and default settings. In the AdaptMap data set, the use of this column is to specify breed identity. If you look into Table 1 of the linked publication, you will find that the ABR abbreviation belongs to the Abregelle goats from Ethiopia. Using the FID column to denote breed information is certainly popular, but you are not limited to it. You can use any meaningful grouping of your data as you see fit.</p></li>
+<li><p>The second column is the &quot;within family ID&quot;, which is just simply called &quot;individual ID&quot; and abbreviated as IID. Although this phrasing might suggest that the same IID could be used with different FID, it is a very good idea to have unique IIDs for each individual in your data set. For any specification of individuals within PLINK however the IID always goes together with FID, so you have to devote sufficient attention to both anyway.</p></li>
+<li><p>and 4) The third column is the ID of the side and the fourth column the ID of the dam of the animal whose IID is denoted in the second column. If any of the parents are genotyped their ID in the third and fourth columns and their IID should correspond. It is often the case that the parents are not known, or at the time of genotyping, there is not enough time to fill out the parent information and it is set to 0. It is not a problem in most cases, but in some types of analyses, we have to be aware of this and include appropriate options (e.g. when looking at the minor allele frequency - don't worry about this now though).</p></li>
+<li><p>Column five contains the sex information of the animal in the IID column. According to the built-in coding, 1 is for males, 2 for females, and 0 is unknown. Similar to parent information, this is also many times missing, usually not a problem, but specific options need to be included in case of any issues come up.</p></li>
+<li><p>The sixth column is to denote the phenotype of the animal in the IID column. Because this is only a single column, only a single phenotype could be specified. In a case-control study the numerical value 1 is reserved for controls, and 2 for the cases. Alternatively, you can use any other number, including decimals for any other phenotype. In the case of missing values, you can use zero or minus nine. The question of what happens if your true phenotype measurements are 0 or -9 is still a mystery for me. In these cases, it is probably a good idea to use slightly different numbers instead.</p></li>
+</ol>
+<p>An additional piece of information you get from the .fam files is the total number of individuals for which genotypes are available. This number is corresponding to the number of lines in the .fam file. In this case, we see that the AdaptMap data set consists of a total of 4653 genotypes!</p>
+</div>
+<div id="bim-file---snp-location-info" class="section level2">
+<h2><span class="header-section-number">6.2</span> Bim file - SNP location info</h2>
+<p>The bum file contains the locations of all SNPs in the data. When you open it with the text editor of your choice, you will see that it is nothing else than an ordinary text file called ADAPTmap_genotypeTOP_20160222_full.bim and looks like this:</p>
+<div class="figure"><span id="fig:fig6-3"></span>
+<img src="images/6-3-AdaptMapBimFile.png" alt="The .bim file format layout" width="402" />
+<p class="caption">
+Figure 6.3: The .bim file format layout
+</p>
+</div>
+<p>Similar to the .fam file, the bim file has six columns, with a fixed structure described in detail on the webpage. Some info about them in brief:</p>
+<ol style="list-style-type: decimal">
+<li><p>The first column contains the chromosome number where the SNP is located. The goats have 29 so-called autosomal chromosomes and the number 30 is the sex chromosome. When you open a file you will see that it starts with a chromosome zero. These are the so-called unplaced SNPs, for which we know their genotype, but we are not entirely certain where they are on the genome.</p></li>
+<li><p>The second column is the SNP name. This name is predefined during the construction of the SNP chip and fixed. If you ever want to compare versions of different SNP chips for the same species, the SNP overlaps based on their names is an excellent way to start.</p></li>
+<li><p>The third column is the position of the SNP in Morgans or centimorgans, with zero value if you do not know or do not care. Honestly, for most of the analyses, this could be kept as zero. If you do some fancy stuff involving recombinations you can always amend this column also in existing map files.</p></li>
+<li><p>The fourth column is the base pair coordinate of the SNP. In other words, you (well, not you personally, but the people who put the chip together) start to count from the beginning of the chromosome and for each SNP write down its exact location. At the beginning of each new chromosome, the counter resets and starts from one again. If we go with the example above, the SNP on the top of the list is on the 109,256,497th position from the start of chromosome 1. Please note that comma or any other separators are not allowed, I use them here just to make the reading more convenient.</p></li>
+<li><p>and 6) In the remaining two columns five and six are the alleles for respective SNPs. All SNPs on the chips are biallelic by design, so you always see only two alleles in each row. So this means that for each SNP there could be only these two characters representing the genotype and the character representing the missing genotypes (not shown in the .bim file, coded as zero by default). This is a very important concept that will be relevant later on when it comes to merging SNP data sets. Genotypes in column five usually denote the minor allele and in column six the major allele (more about the allele frequency in the quality control in chapter <a href="genotype-data-quality-control.html#genotype-data-quality-control">Genotype data quality control</a>). In some cases you also see the number 0 appearing e.g. for SNP snp10412-scaffold1372-579082 right at the beginning of the bim file. This means that in this case, all known genotypes are homozygous GG, i.e. fixed in the sample with no alternative allele.</p></li>
+</ol>
+<p>Similar to .fam files, you can extract one more fairly useful piece of information just by looking at the file. Here again, the number of rows in the .bim file shows how many SNPs are in the data set you are looking at. For the AdaptMap data, this is 53,347 SNPs.</p>
+</div>
+<div id="bed-file---individual-genotypes" class="section level2">
+<h2><span class="header-section-number">6.3</span> Bed file - Individual genotypes</h2>
+<p>So right now you know that the files you downloaded contain genotypes for 4653 animals, each of them genotyped for 53,347 SNPs. But you might rightfully ask: &quot;Where are the genotypes for the individual animals?&quot;</p>
+<p>These are located in the ADAPTmap_genotypeTOP_20160222_full.bed file, but unfortunately, you can not look at them. Well... you can, but all you will see is something like this:</p>
+<div class="figure"><span id="fig:fig6-4"></span>
+<img src="images/6-4-AdaptMapBedFile.png" alt="The .bed file opened with a text editor" width="336" />
+<p class="caption">
+Figure 6.4: The .bed file opened with a text editor
+</p>
+</div>
+<p>This is because the genotypes are coded in a so-called binary format. This not just takes a very small hard disk space, but it is processed quicker by the computer since it's already translated from human-readable to a machine-readable format. Of course, quite often it is very useful to check out the individual genotypes, so to have them in a text format is required. The non-binary file format for the genotype is stored in the so-called ped and map files. These are also some very well-known (I dare to say iconic) file formats and widely used in various programs.</p>
+<p>And how to get these files? It will be your task in your first actual use of the PLINK program. But don't worry! I will help you.</p>
+</div>
+<div id="excercise-1" class="section level2">
+<h2><span class="header-section-number">6.4</span> Excercise</h2>
+<p>Before you move on to the next section it is very useful to challenge yourself and your understanding of the topic that was just discussed. For this time, <a href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.th092">download this genotype dataset from Dryad</a>, connected to the <a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004254">Decker et al.(2014)</a> paper.</p>
+<p>Questions to answer:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>How many animals were genotyped?</p></li>
+<li><p>How many SNPs are available in the data set?</p></li>
+</ol>
+<p>After you have your answer, head over to my YouTube channel to find the solution with some bonus content on this issue.</p>
+<p>If the embedded video does not start, click it again to &quot;Watch on YouTube&quot;. Direct link: <a href="https://www.youtube.com/watch?v=vZyf5aXlB-k" class="uri">https://www.youtube.com/watch?v=vZyf5aXlB-k</a></p>
+<iframe src="https://www.youtube.com/embed/vZyf5aXlB-k" width="672" height="400px">
+</iframe>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-and-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="your-first-plink-tutorial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-snp-data-basics.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Genomics Boot Camp.pdf", "Genomics Boot Camp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

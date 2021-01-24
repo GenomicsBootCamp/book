@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Principal component analysis (PCA) | Genomics Boot Camp</title>
+  <meta name="description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Principal component analysis (PCA) | Genomics Boot Camp" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Principal component analysis (PCA) | Genomics Boot Camp" />
+  
+  <meta name="twitter:description" content="This book shows in a beginner friendly way how to handle and analyse genomic data." />
+  
+
+<meta name="author" content="Gábor Mészáros" />
+
+
+<meta name="date" content="2021-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="genotype-data-quality-control.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Genomics Boot Camp</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hello and welcome!</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>1.2</b> Copyright</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="technical-preparations.html"><a href="technical-preparations.html"><i class="fa fa-check"></i><b>2</b> Technical preparations</a><ul>
+<li class="chapter" data-level="2.1" data-path="technical-preparations.html"><a href="technical-preparations.html#overall-recommendations-tips-and-tricks"><i class="fa fa-check"></i><b>2.1</b> Overall recommendations, tips and tricks</a></li>
+<li class="chapter" data-level="2.2" data-path="technical-preparations.html"><a href="technical-preparations.html#file-naming-conventions"><i class="fa fa-check"></i><b>2.2</b> File naming conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basic-software.html"><a href="basic-software.html"><i class="fa fa-check"></i><b>3</b> Basic software</a><ul>
+<li class="chapter" data-level="3.1" data-path="basic-software.html"><a href="basic-software.html#text-editors"><i class="fa fa-check"></i><b>3.1</b> Text Editors</a></li>
+<li class="chapter" data-level="3.2" data-path="basic-software.html"><a href="basic-software.html#file-management"><i class="fa fa-check"></i><b>3.2</b> File management</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html"><i class="fa fa-check"></i><b>4</b> PLINK - Software for genomic analyses</a><ul>
+<li class="chapter" data-level="4.1" data-path="plink-software-for-genomic-analyses.html"><a href="plink-software-for-genomic-analyses.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>5</b> R and RStudio</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#getting-r-and-r-studio"><i class="fa fa-check"></i><b>5.1</b> Getting R and R Studio</a></li>
+<li class="chapter" data-level="5.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#how-to-use-r-studio"><i class="fa fa-check"></i><b>5.2</b> How to use R Studio</a></li>
+<li class="chapter" data-level="5.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#excercise"><i class="fa fa-check"></i><b>5.3</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html"><i class="fa fa-check"></i><b>6</b> Genotype files in practice</a><ul>
+<li class="chapter" data-level="6.1" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#fam-file---info-on-individuals"><i class="fa fa-check"></i><b>6.1</b> Fam file - Info on individuals</a></li>
+<li class="chapter" data-level="6.2" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bim-file---snp-location-info"><i class="fa fa-check"></i><b>6.2</b> Bim file - SNP location info</a></li>
+<li class="chapter" data-level="6.3" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#bed-file---individual-genotypes"><i class="fa fa-check"></i><b>6.3</b> Bed file - Individual genotypes</a></li>
+<li class="chapter" data-level="6.4" data-path="genotype-files-in-practice.html"><a href="genotype-files-in-practice.html#excercise-1"><i class="fa fa-check"></i><b>6.4</b> Excercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html"><i class="fa fa-check"></i><b>7</b> Your first PLINK tutorial</a><ul>
+<li class="chapter" data-level="7.1" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-plink-options"><i class="fa fa-check"></i><b>7.1</b> The PLINK options</a></li>
+<li class="chapter" data-level="7.2" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#the-ped-and-map-file-format"><i class="fa fa-check"></i><b>7.2</b> The ped and map file format</a></li>
+<li class="chapter" data-level="7.3" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#how-to-run-plink-from-r"><i class="fa fa-check"></i><b>7.3</b> How to run PLINK from R</a></li>
+<li class="chapter" data-level="7.4" data-path="your-first-plink-tutorial.html"><a href="your-first-plink-tutorial.html#exercise-1"><i class="fa fa-check"></i><b>7.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html"><i class="fa fa-check"></i><b>8</b> Genotype data quality control</a><ul>
+<li class="chapter" data-level="8.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#a-toy-example"><i class="fa fa-check"></i><b>8.1</b> A toy example</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-snp"><i class="fa fa-check"></i><b>8.1.1</b> Missingness per SNP</a></li>
+<li class="chapter" data-level="8.1.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#missingness-per-individual"><i class="fa fa-check"></i><b>8.1.2</b> Missingness per individual</a></li>
+<li class="chapter" data-level="8.1.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#minor-allele-frequency"><i class="fa fa-check"></i><b>8.1.3</b> Minor allele frequency</a></li>
+<li class="chapter" data-level="8.1.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#adherence-to-hardy-weinberg-distribution"><i class="fa fa-check"></i><b>8.1.4</b> Adherence to Hardy-Weinberg distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#how-qc-works-in-plink"><i class="fa fa-check"></i><b>8.2</b> How QC works in PLINK</a></li>
+<li class="chapter" data-level="8.3" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exceptions-from-snp-quality-control"><i class="fa fa-check"></i><b>8.3</b> Exceptions from SNP quality control</a></li>
+<li class="chapter" data-level="8.4" data-path="genotype-data-quality-control.html"><a href="genotype-data-quality-control.html#exercise-2"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>9</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="9.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#run-a-pca-in-r"><i class="fa fa-check"></i><b>9.1</b> Run a PCA in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-script"><i class="fa fa-check"></i><b>9.1.1</b> PCA in R - The script</a></li>
+<li class="chapter" data-level="9.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-in-r---the-explanation"><i class="fa fa-check"></i><b>9.1.2</b> PCA in R - The explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#visualize-pca-results"><i class="fa fa-check"></i><b>9.2</b> Visualize PCA results</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-script"><i class="fa fa-check"></i><b>9.2.1</b> PCA visualization - The script</a></li>
+<li class="chapter" data-level="9.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---the-explanation"><i class="fa fa-check"></i><b>9.2.2</b> PCA visualization - The explanation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pca-visualization---comparison-to-published-results"><i class="fa fa-check"></i><b>9.2.3</b> PCA visualization - Comparison to published results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#exercise-summary"><i class="fa fa-check"></i><b>9.3</b> <del>Exercise</del> Summary</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics Boot Camp</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="principal-component-analysis-pca" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Principal component analysis (PCA)</h1>
+<blockquote>
+<p><strong>Learning outcomes:</strong> At the end of this chapter, you will be able to perform and visualize the results from a principal component analysis (PCA).</p>
+</blockquote>
+<p>In this chapter, we will do a principal component analysis (PCA) based on quality-controlled genotype data. From the technical side, we willcontinue to work in R.</p>
+<div id="run-a-pca-in-r" class="section level2">
+<h2><span class="header-section-number">9.1</span> Run a PCA in R</h2>
+<p>The PCA itself is a way to visualize complex systems in a simple way. In our case, we want to show relationships between the worldwide goat populations genotyped in the ADAPTmap project. After the quality control, we have 4532 animals left. If we compute genetic distances (with PLINK), we get a matrix of 4532 by 4532 animals, with more than 10 million pairwise combinations. So a &quot;rather&quot; long list to scroll through, let alone make sense of it.</p>
+<p>Fortunately, we can apply some clever statistical methods to simplify it for us. We will lose some precision and nuances about the relationships between breeds, but in exchange, we can see everything in one figure.</p>
+<div id="pca-in-r---the-script" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> PCA in R - The script</h3>
+<p>For completeness, I show the complete R code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># PCA demo</span>
+<span class="co"># Clear workspace</span>
+<span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())
+<span class="co"># Set working directory</span>
+<span class="kw">setwd</span>(<span class="st">&quot;d:/analysis/2020_GenomicsBootCamp_Demo/&quot;</span>)
+<span class="co"># Run PLINK QC</span>
+<span class="kw">system</span>(<span class="st">&quot;plink --bfile ADAPTmap_genotypeTOP_20160222_full --cow --autosome --geno 0.1 --mind 0.1 --maf 0.05 --nonfounders --allow-no-sex --recode --out ADAPTmap_TOP&quot;</span>)
+
+######################################
+<span class="co"># Principal Component Analysis - PCA #</span>
+######################################
+
+## Genetic distances between individuals
+<span class="kw">system</span>(<span class="st">&quot;plink --cow --allow-no-sex --nonfounders --file ADAPTmap_TOP --distance-matrix --out dataForPCA&quot;</span>)
+
+## Load data
+dist_populations&lt;-<span class="kw">read.table</span>(<span class="st">&quot;dataForPCA.mdist&quot;</span>,<span class="dt">header=</span>F)
+### Extract breed names
+fam &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">famids=</span><span class="kw">read.table</span>(<span class="st">&quot;dataForPCA.mdist.id&quot;</span>)[,<span class="dv">1</span>])
+### Extract individual names 
+famInd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">IID=</span><span class="kw">read.table</span>(<span class="st">&quot;dataForPCA.mdist.id&quot;</span>)[,<span class="dv">2</span>])
+  
+## Perform PCA using the cmdscale function 
+<span class="co"># Time intensive step - takes a few minutes with the 4.5K animals</span>
+mds_populations &lt;-<span class="st"> </span><span class="kw">cmdscale</span>(dist_populations,<span class="dt">eig=</span>T,<span class="dv">5</span>)
+
+## Extract the eigen vectors
+eigenvec_populations &lt;-<span class="st"> </span><span class="kw">cbind</span>(fam,famInd,mds_populations<span class="op">$</span>points)
+
+## Proportion of variation captured by each eigen vector
+eigen_percent &lt;-<span class="st"> </span><span class="kw">round</span>(((mds_populations<span class="op">$</span>eig)<span class="op">/</span><span class="kw">sum</span>(mds_populations<span class="op">$</span>eig))<span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>)</code></pre></div>
+</div>
+<div id="pca-in-r---the-explanation" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> PCA in R - The explanation</h3>
+<p>As you see there are several steps required to get all the data that could be later visualized.</p>
+<p>The computation of genetic distances is done by PLINK, via the <a href="https://www.cog-genomics.org/plink/1.9/distance#ibs_matrix">--distance-matrix</a> option. It creates the already mentioned huge matrix of numbers, saved in a text file <em>dataForPCA.mdist</em>. Go ahead and open it with the text editor of your choice to check it out! Quite a lot of numbers, right?</p>
+<p>We will simplify it using multidimensional scaling in R. To do this, we will first load the text file to R, along with the names of breeds (<em>fam</em> variable) and individual IDs (<em>famInd</em> variable).</p>
+<p>The next step will be the heavy lifting, the multidimensional scaling, and the computation of eigenvectors. This is done using the <em>cmdscale()</em> function, taking into account the first five principal components. As a follow up we merge the PCA results with the breed and individual ID information (<em>eigenvec_populations</em>) and compute the variance explained by each principal component (<em>eigen_percent</em>). This last bit of information on the percent of variance explained is not strictly necessary for the visualization, but it will be a nice addition to our plot.</p>
+</div>
+</div>
+<div id="visualize-pca-results" class="section level2">
+<h2><span class="header-section-number">9.2</span> Visualize PCA results</h2>
+<p>At this point, we have a lot of numbers and results, but still, no picture to show to our boss, supervisors, extended family in annual gatherings, and other conventional or unconventional places where we want to show off with our results. It is time to change it now!</p>
+<div id="pca-visualization---the-script" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> PCA visualization - The script</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visualize PCA in tidyverse</span>
+<span class="co"># Load tidyverse</span>
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;tidyverse&quot;</span>)) {
+  <span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)
+  <span class="kw">library</span>(tidyverse)
+}
+
+<span class="co"># PCA plot</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> eigenvec_populations) <span class="op">+</span>
+<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>,<span class="dt">color =</span> famids), <span class="dt">show.legend =</span> <span class="ot">FALSE</span> ) <span class="op">+</span><span class="st"> </span>
+<span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype=</span><span class="st">&quot;dotted&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype=</span><span class="st">&quot;dotted&quot;</span>) <span class="op">+</span>
+<span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;PCA of wordwide goat populations&quot;</span>,
+    <span class="dt">x =</span> <span class="kw">paste0</span>(<span class="st">&quot;Principal component 1 (&quot;</span>,eigen_percent[<span class="dv">1</span>],<span class="st">&quot; %)&quot;</span>),
+    <span class="dt">y =</span> <span class="kw">paste0</span>(<span class="st">&quot;Principal component 2 (&quot;</span>,eigen_percent[<span class="dv">2</span>],<span class="st">&quot; %)&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st"> </span><span class="kw">theme_minimal</span>()</code></pre></div>
+</div>
+<div id="pca-visualization---the-explanation" class="section level3">
+<h3><span class="header-section-number">9.2.2</span> PCA visualization - The explanation</h3>
+<p>The ggplot2 package from the tidyverse will be used for visualization. If you have done the exercise at the end of the <a href="r-and-rstudio.html#r-and-rstudio">R and RStudio</a> chapter you already have it installed, so you just need to load. If not, you can do it now.</p>
+<p>The first part of the script is a very neat way of making sure everything is in place. I use this in all my R scripts. In short, it checks if the package is already installed on your computer. If yes, it proceeds to load it, in not installs it (if it is on CRAN), and then proceeds to load. You can easily adapt it for any other R package by changing the package name.</p>
+<p>The next bit of code is the visualization itself, in a mixture of base R and tidy coding styles. We will plot the first and second principal components from the <em>eigenvec_populations</em> file. Here I would underline that naming columns as numbers is not ideal, and should be avoided in general. To keep this script as simple as possible, we will go with these rather unfortunate names generated by the <em>cmdscale()</em> function.</p>
+<p>Each breed will have a different color, to better visualize the groups. We will switch off the legend on the figure. If it is on, the legend would completely overtake the screen, given a large number of breeds. But if you feel adventurous, go ahead and change it to <em>show.legend = TRUE</em>.</p>
+<p>With <em>geom_hline()</em> and <em>geom_vline()</em> we add a horizontal and vertical line at 0 for each axis to make the plot nicer. With <em>labs()</em> we add the figure title, and the axis names including the percentages of variance explained. The <em>theme_minimal()</em> is purely an aesthetical tuning of the figure. Again, just go ahead and <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">change it to some other one</a>, if you want.</p>
+</div>
+<div id="pca-visualization---comparison-to-published-results" class="section level3">
+<h3><span class="header-section-number">9.2.3</span> PCA visualization - Comparison to published results</h3>
+<p>If everything went well, you see the following plot in R</p>
+<div class="figure"><span id="fig:fig9-1"></span>
+<img src="images/9-1-resultsPcaGoats.png" alt="Results of the PCA analysis" width="312" />
+<p class="caption">
+Figure 9.1: Results of the PCA analysis
+</p>
+</div>
+<p>Nice, isn't it? Personally, I like it a lot!</p>
+<p>During these sessions, we have produced a similar graph to the researchers working on the data initially. I will put it below and make some comparisons between the two.</p>
+<div class="figure"><span id="fig:fig9-2"></span>
+<img src="images/9-2-resultsPcaPaper.png" alt="Results of the PCA analysis from Colli et al. (2018)" width="258" />
+<p class="caption">
+Figure 9.2: Results of the PCA analysis from Colli et al. (2018)
+</p>
+</div>
+<p>The figure above is from <a href="https://gsejournal.biomedcentral.com/track/pdf/10.1186/s12711-018-0422-x">Colli et al. (2018), published in Genetics, Selection, Evolution</a> (open access), figure 4a.</p>
+<p>You see that the general shape of the two graphs is virtually identical, which is kind of expected, as we used the same initial data and same methods. There are a few minor differences though, worth pointing out.</p>
+<p>Maybe the most striking one is the difference in explained variance shown on the axes. This might be due to the differences in quality control. If you check out the Methods section of Colli et al. (2018), you will see that they looked at the data from a variety of different angles, not just missingness. Also, this is a good example of what other factors could be taken into account in QC, so it is worthwhile to check it out anyway.</p>
+<p>The other issue is that in the paper there are much fewer data points. This is because only the middle point, i.e. one point for each breed is visualized. Additionally, they have avoided the necessity of the legend by putting the breed abbreviations straight in the figure. Still, many of them are overlapping and unreadable, but arguably better than a legend with hundreds of entries.</p>
+<p>The third thing I want to point out is the color scheme. In our case, there is a different color for each breed. This leads to virtually indistinguishable colors for some of the breeds. The problem is even more serious for people with any form of color blindness. Yes, it is pretty but otherwise utterly unusable. In Colli et al. (2018) they use color codes for the continents, adding yet another nice piece of information to the figure: red=Africa, green=Europe, blue=West Asia, pink=North America, light blue=South America, orange=Oceania, black=wild goats.</p>
+</div>
+</div>
+<div id="exercise-summary" class="section level2">
+<h2><span class="header-section-number">9.3</span> <del>Exercise</del> Summary</h2>
+<p>If you have followed along with the other posts, you know that I usually give you a small exercise at the end. It will not be so in this case. Yes, I could come up with another freely available data set and ask you to do a PCA for it.</p>
+<p>But in this case, I will not do that.</p>
+<p>This chapter is the final piece in a workflow, where I wanted to describe how to process SNP genomic data, without any previous experience. Well... With knowledge of the theory side, but no experience in practical data handling and analysis.</p>
+<p>Yes, many other things need to be said and done to increase your proficiency. But considering that you started with no previous practical experience, we have to also acknowledge that you have come a long way.</p>
+<p>Well done! Congratulations on your achievement!</p>
+<p>At this point my Excercise for you, if you really want to have one, is to <em>celebrate</em>. Maybe not by throwing a big party, but in a small personal way. Treat yourself with a chocolate or something, take some time off, play a game, think about the work-life balance.</p>
+<p>If you liked these chapters, <a href="https://www.youtube.com/channel/UCXuX-kQ1TbKHWeB75NgmhlA">consider subscribing to my YouTube channel</a> and <a href="https://twitter.com/GaborM_ABG">follow me on Twitter</a>. These are just two simple clicks for you, but for me are an indication of interest and motivation to go forward!</p>
+<p>This is of course not the end! I plan to follow up and extend the book and also on the <a href="https://www.youtube.com/channel/UCXuX-kQ1TbKHWeB75NgmhlA">YouTube channel</a> with various topics related to genetics and genomics. So stay tuned!</p>
+<p>As for now, thank you for your time, and have a nice day!</p>
+<p>If the embedded video does not start, click it again to &quot;Watch on YouTube&quot;. Direct link: <a href="https://www.youtube.com/watch?v=l5afbHnw6Uw" class="uri">https://www.youtube.com/watch?v=l5afbHnw6Uw</a></p>
+<iframe src="https://www.youtube.com/embed/l5afbHnw6Uw" width="672" height="400px">
+</iframe>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="genotype-data-quality-control.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-pca-example.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Genomics Boot Camp.pdf", "Genomics Boot Camp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
